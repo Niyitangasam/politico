@@ -1,0 +1,29 @@
+{
+  "name": "politico",
+  "version": "1.0.0",
+  "description": "An application for politico party",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Niyitangasam/politico.git"
+  },
+  "author": "Samuel NIYITANGA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Niyitangasam/politico/issues"
+  },
+  "homepage": "https://github.com/Niyitangasam/politico#readme",
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9"
+  }
+}
