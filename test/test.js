@@ -1,11 +1,12 @@
+
 /* eslint-disable */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../app');
 
 const should = chai.should();
-const Party = require('../model/Party');
-const Office = require('../model/Office');
+const Party = require('../model/party');
+const Office = require('../model/office');
 
 
 chai.use(chaiHttp);
