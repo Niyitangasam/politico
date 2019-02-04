@@ -1,4 +1,4 @@
-let Party = [
+const Party = [
   {
     id: 1,
     name: 'Sam',
