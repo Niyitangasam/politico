@@ -4,7 +4,7 @@
   "description": "An application for politico party",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "express": "^4.16.4",
     "nodemon": "^1.18.9"
   }

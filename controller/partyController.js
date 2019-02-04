@@ -9,7 +9,7 @@ exports.createParty = (req, res) => {
     logoUrl: req.body.logoUrl,
   };
   parties.push(newParty);
-  return res.send({ status: 200, data: newParty });
+  return res.status(201).send({ status: 201, data: newParty });
 };
 
 
@@ -17,7 +17,7 @@ exports.createParty = (req, res) => {
 
 exports.getById = (req, res) => {
   const party = parties.find(p => p.id === parseInt(req.params.id, 10));
-  if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
+  if (!party) return res.status(404).send({ status: 404, Error: 'The party with given ID was not found' });
   return res.send({ status: 200, data: party });
 };
 

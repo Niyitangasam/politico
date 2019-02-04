@@ -1,7 +1,7 @@
 const Office = [
   {
     id: 1,
-    type: 'federal', // federal, legislative, state, or local government
+    type: 'federal',
     name: 'Butare',
   },
 ];
