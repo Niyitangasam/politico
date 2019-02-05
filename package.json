@@ -4,6 +4,7 @@
   "description": "An application for politico party",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": " nyc mocha --exit ",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
