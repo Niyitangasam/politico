@@ -4,7 +4,8 @@
   "description": "An application for politico party",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --exit "
+    "test": "mocha --exit ",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
