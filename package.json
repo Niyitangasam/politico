@@ -4,7 +4,7 @@
   "description": "An application for politico party",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --timeout 10000"
+    "test": "mocha --exit "
   },
   "repository": {
     "type": "git",
