@@ -15,7 +15,7 @@ exports.createParty = (req, res) => {
 
 // Fetch a specific political party record.
 
-exports.getById = (req, res) => {
+exports.getOnlyOne = (req, res) => {
   const party = parties.find(p => p.id === parseInt(req.params.id, 10));
   if (!party) return res.status(404).send({ status: 404, Error: 'The party with given ID was not found' });
   return res.send({ status: 200, data: party });
@@ -24,7 +24,7 @@ exports.getById = (req, res) => {
 
 // Fetch all political parties records
 
-exports.getAll = (req, res) => res.send({ status: 200, data: parties });
+exports.getAllParty = (req, res) => res.send({ status: 200, data: parties });
 
 // Edit the name of a specific political party
 exports.editPartyName = (req, res) => {
