@@ -4,8 +4,8 @@
   "description": "An application for politico party",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --exit ",
-    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+    "test": " nyc mocha --exit ",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/Niyitangasam/politico#readme",
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nyc": "^13.2.0"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
