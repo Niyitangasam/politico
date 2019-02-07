@@ -51,6 +51,9 @@ a:hover {
 	clear:both;
 	height: 350px;
 }
+#main p{
+	margin-top: 40px;
+}
 
 
 #footer {
@@ -63,7 +66,7 @@ a:hover {
 /*Login and sign up form*/
 
 .form {
-	position:relative;
+  position:relative;
   background: rgba(19, 35, 47, 0.9);
   padding: 40px;
   max-width: 400px;
@@ -72,63 +75,23 @@ a:hover {
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
-
-label {
-  position: absolute;
-  -webkit-transform: translateY(6px);
-          transform: translateY(6px);
-  left: 13px;
-  color: rgba(255, 255, 255, 0.5);
-  transition: all 0.25s ease;
-  -webkit-backface-visibility: hidden;
-  pointer-events: none;
-  font-size: 12px;
+.field-wrap {
+  position: relative;
+  margin-bottom: 40px;
 }
-label .req {
-  margin: 2px;
-  color: #1ab188;
-}
-
-label.active {
-  -webkit-transform: translateY(50px);
-          transform: translateY(50px);
-  left: 2px;
-  font-size: 14px;
-}
-label.active .req {
-  opacity: 0;
-}
-
-label.highlight {
-  color: #ffffff;
-}
-
-input, textarea {
-  font-size: 22px;
-  display: block;
+.field-wrap input {
+  font-size: 15px;
   width: 100%;
   height: 100%;
   padding: 5px 10px;
   background: none;
-  background-image: none;
   border: 1px solid #a0b3b0;
   color: #ffffff;
   border-radius: 0;
-  transition: border-color .25s ease, box-shadow .25s ease;
 }
-input:focus, textarea:focus {
+input:focus {
   outline: 0;
   border-color: #1ab188;
-}
-
-textarea {
-  border: 2px solid #a0b3b0;
-  resize: vertical;
-}
-
-.field-wrap {
-  position: relative;
-  margin-bottom: 40px;
 }
 
 .button {
@@ -139,7 +102,6 @@ textarea {
   text-transform: uppercase;
   background: #1ab188;
   color: #ffffff;
-  -webkit-appearance: none;
 }
 .button:hover, .button:focus {
   background: #179b77;
@@ -153,5 +115,50 @@ textarea {
 .forgot {
   margin-top: -20px;
   text-align: right;
+}
+
+#profile {
+	float:left;
+	margin-right: 100px
+}
+#profile_left {
+	float:right;
+}
+
+#info {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#info td, #info th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+#info tr:hover {background-color: #ddd;}
+
+#info th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color:#4CAF50;
+  text-align: left;
+  color: white;
+}
+#politician li{
+	 margin-left: 20px;
+}
+
+.vote {
+	margin-left: 20px;
+}
+.vote input {
+  width: none;
+  height: none;
+}
+.vote-block {
+  display: block;
+  width: 50%;
+  margin-left: 20px;
 }
 
