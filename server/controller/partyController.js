@@ -1,7 +1,7 @@
-const parties = require('../model/party');
+import parties from '../model/party';
 
 // create a party
-exports.createParty = (req, res) => {
+const createParty = (req, res) => {
   const newParty = {
     id: parties.length + 1,
     name: req.body.name,
@@ -15,7 +15,7 @@ exports.createParty = (req, res) => {
 
 // Fetch a specific political party record.
 
-exports.getOnlyOne = (req, res) => {
+const getOnlyOne = (req, res) => {
   const party = parties.find(p => p.id === parseInt(req.params.id, 10));
   if (!party) return res.status(404).send({ status: 404, Error: 'The party with given ID was not found' });
   return res.send({ status: 200, data: party });
@@ -24,21 +24,29 @@ exports.getOnlyOne = (req, res) => {
 
 // Fetch all political parties records
 
-exports.getAllParty = (req, res) => res.send({ status: 200, data: parties });
+const getAllParty = (req, res) => res.send({ status: 200, data: parties });
 
 // Edit the name of a specific political party
-exports.editPartyName = (req, res) => {
+const editPartyName = (req, res) => {
   const party = parties.find(p => p.id === parseInt(req.params.id, 10));
   if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
-  party.name = req.params.name;
-  return res.send({ status: 200, data: party });
+  party.name = req.body.name;
+  const updatedData = {
+    id: party.id,
+    name: party.name,
+  };
+  return res.send({ status: 200, data: [updatedData] });
 };
 
 // Delete a specific political party.
-exports.deleteParty = (req, res) => {
+const deleteParty = (req, res) => {
   const party = parties.find(p => p.id === parseInt(req.params.id, 10));
   if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
   const index = parties.indexOf(party);
   parties.splice(index, 1);
   return res.send({ status: 200, data: party });
+};
+
+export {
+  createParty, getAllParty, getOnlyOne, editPartyName, deleteParty,
 };

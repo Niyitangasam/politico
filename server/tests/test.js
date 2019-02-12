@@ -1,12 +1,12 @@
-
 /* eslint-disable */
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const app = require('../app');
+
+import chai from 'chai';
+import  chaiHttp from'chai-http';
+import  app from '../../app';
 
 const should = chai.should();
-const Party = require('../model/party');
-const Office = require('../model/office');
+import Party from '../model/party';
+import Office from '../model/office';
 
 
 chai.use(chaiHttp);
@@ -19,6 +19,10 @@ const newParty = {
 const newOffice = {
   'type': 'Legislative',
   'name': 'Kigali'
+};
+
+const newName ={
+  'name': 'Butare',
 };
 
 describe('POST /parties', () => {
@@ -60,10 +64,10 @@ describe('/GET Parties', () => {
 
 describe('PATCH /parties/<party-id>/name', () => {
   it('It should update only the name and return object with updated data', (done) => {
-    chai.request(app).patch('/api/v1/parties/1/Samuel').end((err, res) => {
+    chai.request(app).patch('/api/v1/parties/1/name').send(newName).end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.an('object');
-      res.body.should.have.property('data').be.an('object');
+      res.body.should.have.property('data').be.a('array');
       done();
     });
   });
