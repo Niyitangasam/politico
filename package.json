@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/Niyitangasam/politico#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.3.1",
+    "babel-core": "^6.26.3",
     "coveralls": "^3.0.2",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
