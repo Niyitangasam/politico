@@ -24,12 +24,18 @@ a:hover {
 }
 #top {
 	padding:13px 0 0;
-	margin:0 0 60px;
+	margin:0 0 10px;
 	color:blue;
 	height:31px;
 }
+#logo {
+  font-size:2.3em;
+  float:left;
+  margin:10px 15px 0 0;
+}
 
 #menu {
+  font-size:1.4em;
 	float:right;
 	margin:10px 15px 0 0;
 }
@@ -162,3 +168,15 @@ input:focus {
   margin-left: 20px;
 }
 
+
+@media only screen and (min-width: 601px) {
+  div.menu {
+    display:block;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  div.example {
+    font-size: 30px;
+  }
+}
