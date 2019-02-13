@@ -50,14 +50,25 @@ const getAllParty = (req, res) => res.send({
 const editPartyName = (req, res) => {
   const party = parties.find(eachParty => eachParty.id === parseInt(req.params.id, 10));
   if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
-  party.name = req.body.name;
-  const updatedData = {
-    id: party.id,
-    name: party.name,
-  };
-  return res.send(
-    { status: 200, data: [updatedData] },
-  );
+  const schema = joi.object().keys({
+    name: joi.string().required(),
+  });
+  const result = joi.validate(req.body, schema, {
+    abortEarly: false,
+  });
+  if (result.error === null) {
+    party.name = req.body.name;
+    const updatedData = {
+      id: party.id,
+      name: party.name,
+    };
+    return res.send({ status: 200, data: [updatedData] });
+  }
+  const errors = [];
+  for (let index = 0; index < result.error.details.length; index += 1) {
+    errors.push(result.error.details[index].message.split('"').join(' '));
+  }
+  return res.status(422).send({ status: 422, Error: errors });
 };
 
 // Delete a specific political party.
