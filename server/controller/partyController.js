@@ -37,7 +37,9 @@ const editPartyName = (req, res) => {
     id: party.id,
     name: party.name,
   };
-  return res.send({ status: 200, data: [updatedData] });
+  return res.send(
+    { status: 200, data: [updatedData] },
+  );
 };
 
 // Delete a specific political party.
