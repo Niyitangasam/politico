@@ -1,30 +1,37 @@
-
 /* eslint-disable */
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const app = require('../app');
+
+import chai from 'chai';
+import  chaiHttp from'chai-http';
+import  app from '../app';
 
 const should = chai.should();
-const Party = require('../model/party');
-const Office = require('../model/office');
+import Party from '../model/party';
+import Office from '../model/office';
 
 
 chai.use(chaiHttp);
 
 const newParty = {
-  'name': 'partyA',
-  'hqAddress': ' Kigali',
-  'logoUrl': 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjl_JiM_KHgAhV6AGMBHfM9D3MQjRx6BAgBEAU&url=https%3A%2F%2Fmind42.com%2Fpublic%2F8032d45e-3940-4f3e-9e83-1e442e369f04&psig=AOvVaw2UEtBXXMhu7ql9hfm29jK0&ust=1549365948810068'
+  "name": "partyA",
+  "hqAddress": "Kigali",
+  "logoUrl": "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjl",
 };
 const newOffice = {
-  'type': 'Legislative',
-  'name': 'Kigali'
+  "type": "Legislative",
+  "name": "Kigali",
+};
+
+const newName ={
+  "name": "Butare",
 };
 
 describe('POST /parties', () => {
   it('It should add new party and return an object with a status code and a new part created', (done) => {
     chai.request(app).post('/api/v1/parties/').send(newParty).end((err, res) => {
       res.should.have.status(201);
+      res.body.data.should.all.have.property('name', newParty.name);
+      res.body.data.should.all.have.property('hqAddress', newParty.hqAddress);
+      res.body.data.should.all.have.property('logoUrl', newParty.logoUrl);
       res.body.should.be.an('object');
       done();
     });
@@ -60,10 +67,10 @@ describe('/GET Parties', () => {
 
 describe('PATCH /parties/<party-id>/name', () => {
   it('It should update only the name and return object with updated data', (done) => {
-    chai.request(app).patch('/api/v1/parties/1/Samuel').end((err, res) => {
+    chai.request(app).patch('/api/v1/parties/1/name').send(newName).end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.an('object');
-      res.body.should.have.property('data').be.an('object');
+      res.body.should.have.property('data').be.a('array');
       done();
     });
   });
@@ -82,7 +89,7 @@ describe('DELETE /parties/<party-id>', () => {
 
 describe('POST /offices', () => {
   it('It should create new office and return an object with a status code and a new part created', (done) => {
-    chai.request(app).post('/api/v1/offices').send(newParty).end((err, res) => {
+    chai.request(app).post('/api/v1/offices').send(newOffice).end((err, res) => {
       res.should.have.status(201);
       res.body.should.be.an('object');
       done();

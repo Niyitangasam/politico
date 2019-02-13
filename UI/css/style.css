@@ -28,6 +28,7 @@ a:hover {
 	color:blue;
 	height:31px;
 }
+
 #logo {
   font-size:2.3em;
   float:left;
@@ -80,6 +81,9 @@ a:hover {
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
+#top_form{
+   margin-left: 350px;
+}
 
 .field-wrap {
   position: relative;
@@ -92,7 +96,7 @@ a:hover {
   padding: 5px 10px;
   background: none;
   border: 1px solid #a0b3b0;
-  color: #ffffff;
+  color: #777;
   border-radius: 0;
 }
 input:focus {
@@ -101,6 +105,15 @@ input:focus {
 }
 
 .button {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  text-transform: uppercase;
+  background: #1ab188;
+  color: #ffffff;
+}
+.button a {
   border: 0;
   outline: none;
   border-radius: 0;
@@ -167,16 +180,44 @@ input:focus {
   width: 50%;
   margin-left: 20px;
 }
-
-
-@media only screen and (min-width: 601px) {
-  div.menu {
-    display:block;
-  }
+.user-img {
+   width: 150px;
+   height: 150px;
+   margin-left: 130px;
 }
+.logout{
+  float: right;
+  font-size: 20px;
+}
+.info {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    font-family: arial;
+}
+@media only screen and (max-width: 1024px) {
 
-@media only screen and (max-width: 600px) {
-  div.example {
-    font-size: 30px;
-  }
+    table,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    tr {
+        border: 1px solid #ccc;
+    }
+
+    td {
+        border: none;
+        position: relative;
+        padding: 20px;
+    }
+
+    .content {
+        margin-left: 0px;
+    }
 }
