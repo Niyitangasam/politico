@@ -10,20 +10,22 @@ const createOffice = (req, res) => {
   const result = joi.validate(req.body, schema, {
     abortEarly: false,
   });
-  if (result.error === null) {
-    const newOffice = {
-      id: offices.length + 1,
-      type: req.body.type,
-      name: req.body.name,
-    };
-    offices.push(newOffice);
-    return res.status(201).send({ status: 200, data: newOffice });
+
+  if (result.error != null) {
+    const errors = [];
+    for (let index = 0; index < result.error.details.length; index += 1) {
+      errors.push(result.error.details[index].message.split('"').join(' '));
+    }
+    return res.status(422).send({ status: 422, Error: errors });
   }
-  const errors = [];
-  for (let index = 0; index < result.error.details.length; index += 1) {
-    errors.push(result.error.details[index].message.split('"').join(' '));
-  }
-  return res.status(422).send({ status: 422, Error: errors });
+
+  const newOffice = {
+    id: offices.length + 1,
+    type: req.body.type,
+    name: req.body.name,
+  };
+  offices.push(newOffice);
+  return res.status(201).send({ status: 200, data: newOffice });
 };
 
 

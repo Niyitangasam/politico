@@ -14,22 +14,24 @@ const createParty = (req, res) => {
   const result = joi.validate(data, schema, {
     abortEarly: false,
   });
-  if (result.error === null) {
-    const newParty = {
-      id: parties.length + 1,
-      name: data.name,
-      hqAddress: data.hqAddress,
-      logoUrl: data.logoUrl,
-    };
-    parties.push(newParty);
-    return res.status(201).send({ status: 201, data: newParty });
+  if (result.error != null) {
+    const errors = [];
+    for (let index = 0; index < result.error.details.length; index += 1) {
+      errors.push(result.error.details[index].message.split('"').join(' '));
+    }
+    return res.status(422).send({ status: 422, Error: errors });
   }
-  const errors = [];
-  for (let index = 0; index < result.error.details.length; index += 1) {
-    errors.push(result.error.details[index].message.split('"').join(' '));
-  }
-  return res.status(422).send({ status: 422, Error: errors });
+
+  const newParty = {
+    id: parties.length + 1,
+    name: data.name,
+    hqAddress: data.hqAddress,
+    logoUrl: data.logoUrl,
+  };
+  parties.push(newParty);
+  return res.status(201).send({ status: 201, data: newParty });
 };
+
 
 // Fetch a specific political party record.
 
