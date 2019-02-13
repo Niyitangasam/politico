@@ -24,7 +24,9 @@ const getOnlyOne = (req, res) => {
 
 // Fetch all political parties records
 
-const getAllParty = (req, res) => res.send({ status: 200, data: parties });
+const getAllParty = (req, res) => res.send({
+  status: 200, data: parties,
+});
 
 // Edit the name of a specific political party
 const editPartyName = (req, res) => {
