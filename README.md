@@ -18,8 +18,8 @@ GitHub page (gh-page) of this project accessed using trough  [Politico](https://
 ## Requirements
 
 * `NodeJs` Runtime environment that helps to run JavaScript not only in the browser even on the server.
-* `Express` NodeJS framework used for making the back-end.
-* `Joi` and `Morgan` API request body error validation and HTTP Request logger respectively.
+* `Express` As web framework for Node Js.
+* `Joi` for API request body error validation.
 
 
 ## Installation
@@ -28,9 +28,8 @@ GitHub page (gh-page) of this project accessed using trough  [Politico](https://
 
 # Setup
 - You need to have `git`, `NodeJS` and `nmp` installed.
-- Clone the application using  `https://github.com/Niyitangasam/politico.git`
+- Clone the application on `https://github.com/Niyitangasam/politico.git`
 - `npm install` to install all the dependencies.
-- `npm update` to update the dependencies.
 
 
 
@@ -44,7 +43,17 @@ Starting application, Run:
 
 # API ENDPOINTS
 
-* POST `/api/v1/parties` Create a political party.
+* POST `/api/v1/parties` Create a new political party.
+
+      ` ## Expected Response:
+       {
+  		 “status” : Integer ,
+         “data” : [ {
+            “id” : Integer ,
+            “name” : String ,
+          } ]
+       }`
+
 * GET `/api/v1/parties` Get all political parties.
 * GET `/api/v1/parties/<id>` Get a specific political party.
 * PATCH `/api/v1/parties/<id>/name` Edit a specific political party.
