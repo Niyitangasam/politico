@@ -4,8 +4,8 @@
   "description": "An application for politico party",
   "main": "app.js",
   "scripts": {
-    "start": "babel-node ./server/app.js",
-    "start-dev": "nodemon --exec babel-node server/app.js",
+    "start": "nodemon --exec babel-node server/app.js",
+    "heroku":"babel-node ./server/index.js",
     "test": " nyc mocha \"./server/tests/*.js\" --require @babel/register --exit ",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
