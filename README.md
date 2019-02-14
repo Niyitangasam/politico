@@ -58,5 +58,5 @@ Starting application, Run:
 
 # Heroku
 
-Access link :[Visit the link](https://politico-sam.herokuapp.com/). You can test the above API endpoints using this  URL `https://politico-sam.herokuapp.com/` .
+Access link :[Visit the link](https://politico-samuel.herokuapp.com/). You can test the above API endpoints using this  URL `https://politico-samuel.herokuapp.com/`.
 
