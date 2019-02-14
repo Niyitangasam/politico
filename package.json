@@ -19,18 +19,18 @@
   },
   "homepage": "https://github.com/Niyitangasam/politico#readme",
   "devDependencies": {
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"  
+  },
+  "dependencies": {
+    "mocha": "^5.2.0",
+    "nyc": "^13.2.0",
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",
     "coveralls": "^3.0.2",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "mocha": "^5.2.0",
-    "nyc": "^13.2.0"
-  },
-  "dependencies": {
     "babel-cli": "^6.26.0",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
