@@ -43,11 +43,11 @@ Starting application, Run:
 
 # API ENDPOINTS
 
-## POST `/api/v1/parties` Create a new political party.
+#### POST `/api/v1/parties` Create a new political party.
 
 * Sample of Expected Response:
 
-     ```sh 
+     ```
        {
   		 “status” : 201 ,
          “data” : [ {
@@ -58,11 +58,11 @@ Starting application, Run:
 
      ```
 
-### GET `/api/v1/parties` Get all political parties.
+#### GET `/api/v1/parties` Get all political parties.
 
 * Sample of Expected Response:
 
-      ```sh 
+      ``` 
        {
   		 “status” : 201 
          “data” : [ {
@@ -77,11 +77,11 @@ Starting application, Run:
        }
        ```
 
-### GET `/api/v1/parties/<id>` Get a specific political party by its ID.
+#### GET `/api/v1/parties/<id>` Get a specific political party by its ID.
 
 * Sample of Expected Response:
 
-      ```sh 
+      ```
        {
   		 “status” : 200 ,
          “data” : [ {
@@ -92,11 +92,11 @@ Starting application, Run:
        }
       ```
 
-###  PATCH `/api/v1/parties/<id>/name` Edit a specific political party.
+#### PATCH `/api/v1/parties/<id>/name` Edit a specific political party.
 
 * Sample of Expected Response:
 
-      ```sh 
+      ```
        {
   		 “status” : 200 ,
          “data” : [ {
@@ -106,11 +106,11 @@ Starting application, Run:
        }
       ```
 
-### DELETE `/api/v1/parties/<id>` Delete a particular party.
+#### DELETE `/api/v1/parties/<id>` Delete a particular party.
 
 * Sample of Expected Response:
 
-     ```sh 
+     ```
        {
   		 “status” : 200 ,
          “data” : [ {
@@ -119,11 +119,11 @@ Starting application, Run:
        }
      ```
 
-### POST `/api/v1/offices` Creating a political office.
+#### POST `/api/v1/offices` Creating a political office.
 
 * Sample of Expected Response:
 
-      ```sh  
+      ```  
        {
   		 “status” : 201 ,
          “data” : [ {
@@ -134,12 +134,12 @@ Starting application, Run:
        }
       ```
 
-### GET `/api/v1/offices` Retreiving all political offices.
+#### GET `/api/v1/offices` Retreiving all political offices.
 
  * Sample of Expected Response:
 
-      ```sh 
-       {
+      ```
+      {
   		 “status” : 200 ,
          “data” : [ {
             “id” : 1 ,
@@ -153,11 +153,11 @@ Starting application, Run:
        }
       ```
 
-### GET `/api/v1/offices/<id>` Getting a political office for a specific id.
+#### GET `/api/v1/offices/<id>` Getting a political office for a specific id.
 
 * Sample of Expected Response:
 
-      ```sh  
+      ``` 
        {
   		 “status” : 200 ,
          “data” : [ {
