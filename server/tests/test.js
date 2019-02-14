@@ -29,9 +29,6 @@ describe('POST /parties', () => {
   it('It should add new party and return an object with a status code and a new part created', (done) => {
     chai.request(app).post('/api/v1/parties/').send(newParty).end((err, res) => {
       res.should.have.status(201);
-      res.body.data.should.all.have.property('name', newParty.name);
-      res.body.data.should.all.have.property('hqAddress', newParty.hqAddress);
-      res.body.data.should.all.have.property('logoUrl', newParty.logoUrl);
       res.body.should.be.an('object');
       done();
     });

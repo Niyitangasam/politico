@@ -7,9 +7,10 @@ const createParty = (req, res) => {
   const data = req.body;
 
   const schema = joi.object().keys({
-    name: joi.string().required(),
-    hqAddress: joi.string().required(),
-    logoUrl: joi.string().required(),
+    name: joi.string().regex(/[a-zA-Z]/).min(3).max(40)
+      .required(),
+    hqAddress: joi.string().min(3).max(60).required(),
+    logoUrl: joi.string().min(5).max(200).required(),
   });
   const result = joi.validate(data, schema, {
     abortEarly: false,
@@ -29,7 +30,12 @@ const createParty = (req, res) => {
     logoUrl: data.logoUrl,
   };
   parties.push(newParty);
-  return res.status(201).send({ status: 201, data: newParty });
+
+  const response = {
+    id: newParty.id,
+    name: newParty.name,
+  };
+  return res.status(201).send({ status: 201, data: [response] });
 };
 
 
@@ -38,22 +44,38 @@ const createParty = (req, res) => {
 const getOnlyOne = (req, res) => {
   const party = parties.find(p => p.id === parseInt(req.params.id, 10));
   if (!party) return res.status(404).send({ status: 404, Error: 'The party with given ID was not found' });
-  return res.send({ status: 200, data: party });
+  const response = {
+    id: party.id,
+    name: party.name,
+    logoUrl: party.logoUrl,
+  };
+  return res.send({ status: 200, data: [response] });
 };
 
 
 // Fetch all political parties records
 
-const getAllParty = (req, res) => res.send({
-  status: 200, data: parties,
-});
+const getAllParty = (req, res) => {
+  const response = [];
+
+
+  for (let index = 0; index < parties.length; index += 1) {
+    const party = {
+      id: parties[index].id,
+      name: parties[index].name,
+      logoUrl: parties[index].logoUrl,
+    };
+    response.push(party);
+  }
+  return res.send({ status: 200, data: response });
+};
 
 // Edit the name of a specific political party
 const editPartyName = (req, res) => {
   const party = parties.find(eachParty => eachParty.id === parseInt(req.params.id, 10));
   if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
   const schema = joi.object().keys({
-    name: joi.string().required(),
+    name: joi.string().regex(/[a-zA-Z]/).min(3).required(),
   });
   const result = joi.validate(req.body, schema, {
     abortEarly: false,
@@ -79,7 +101,7 @@ const deleteParty = (req, res) => {
   if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
   const index = parties.indexOf(party);
   parties.splice(index, 1);
-  return res.send({ status: 200, data: party });
+  return res.send({ status: 200, message: ['Party Deleted'] });
 };
 
 export {
