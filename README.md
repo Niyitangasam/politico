@@ -7,13 +7,13 @@
 
 A project for andela boot camp that will enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
-# FRONT END
+
 
 # Github-page
 GitHub page (gh-page) of this project accessed using trough  [Politico](https://niyitangasam.github.io/politico/UI/)
 
 
-# BACK END
+
 
 ## Requirements
 
