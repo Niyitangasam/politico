@@ -1,6 +1,6 @@
 # Politico 
 
-[![Build Status](https://travis-ci.org/Niyitangasam/politico.svg?branch=develop)](https://travis-ci.org/Niyitangasam/politico) [![Coverage Status](https://coveralls.io/repos/github/Niyitangasam/politico/badge.svg?branch=backend)](https://coveralls.io/github/Niyitangasam/politico?branch=backend) [![Maintainability](https://api.codeclimate.com/v1/badges/821a7bda21296c607746/maintainability)](https://codeclimate.com/github/Niyitangasam/politico/maintainability)
+[![Build Status](https://travis-ci.org/Niyitangasam/politico.svg?branch=develop)](https://travis-ci.org/Niyitangasam/politico) [![Coverage Status](https://coveralls.io/repos/github/Niyitangasam/politico/badge.svg?branch=develop)](https://coveralls.io/github/Niyitangasam/politico?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/821a7bda21296c607746/maintainability)](https://codeclimate.com/github/Niyitangasam/politico/maintainability)
 ============
 
 # Description
@@ -43,25 +43,113 @@ Starting application, Run:
 
 # API ENDPOINTS
 
-* POST `/api/v1/parties` Create a new political party.
+### POST `/api/v1/parties` Create a new political party.
 
-      ` ## Expected Response:
+* Sample of Expected Response:
+      ` 
        {
-  		 “status” : Integer ,
+  		 “status” : 201 ,
          “data” : [ {
-            “id” : Integer ,
-            “name” : String ,
+            “id” : 1,
+            “name” : "Niyitanga" ,
           } ]
        }`
 
-* GET `/api/v1/parties` Get all political parties.
-* GET `/api/v1/parties/<id>` Get a specific political party.
-* PATCH `/api/v1/parties/<id>/name` Edit a specific political party.
-* DELETE `/api/v1/parties/<id>` Delete a particular party.
+### GET `/api/v1/parties` Get all political parties.
 
-* POST `/api/v1/offices` Creating a political office.
-* GET `/api/v1/offices` Retreiving all political offices. 
-* GET `/api/v1/offices/<id>` Getting a political office for a specific id.
+* Sample of Expected Response:
+      ` 
+       {
+  		 “status” : 201 
+         “data” : [ {
+            “id” : 1,
+            “name” : "Niyitanga" ,
+            “logoUrl” : "https%3A%2F%2Fwww.lhemom%2Flogo%2F&psig=AOvVaw0EULr1S4LrEu5aXU",
+          } , {
+            “id” : 2,
+            “name” : "Samuel" ,
+            “logoUrl” : "https%3A%2F%2Fwww.logastig=AOvVaw0EULr1S4LrEu5aXU",
+          }]
+       }`
+
+### GET `/api/v1/parties/<id>` Get a specific political party by its ID.
+
+* Sample of Expected Response:
+      ` 
+       {
+  		 “status” : 200 ,
+         “data” : [ {
+            “id” : 1,
+            “name” : "Niyitanga" ,
+            “logoUrl” : "https%3A%2F%2Fwww.lhemom%2Flogo%2F&psig=AOvVaw0EULr1S4LrEu5aXU",
+          } ]
+       }`
+
+###  PATCH `/api/v1/parties/<id>/name` Edit a specific political party.
+
+* Sample of Expected Response:
+      ` 
+       {
+  		 “status” : 200 ,
+         “data” : [ {
+            “id” : 1,
+            “name” : "Samuel" ,
+          } ]
+       }`
+
+### DELETE `/api/v1/parties/<id>` Delete a particular party.
+
+* Sample of Expected Response:
+      ` 
+       {
+  		 “status” : 200 ,
+         “data” : [ {
+            “message” : "Party Deleted" ,
+          } ]
+       }`
+
+### POST `/api/v1/offices` Creating a political office.
+
+* Sample of Expected Response:
+      ` 
+       {
+  		 “status” : 201 ,
+         “data” : [ {
+            “id” : 1 ,
+            “type” : "legislative" ,
+            “name” : "PPR P" ,
+          } ]
+       }`
+
+### GET `/api/v1/offices` Retreiving all political offices.
+
+ * Sample of Expected Response:
+      ` 
+       {
+  		 “status” : 200 ,
+         “data” : [ {
+            “id” : 1 ,
+            “type” : "legislative" ,
+            “name” : "PPR P" ,
+          } , {
+            “id” : 2 ,
+            “type” : "legislative" ,
+            “name” : "MNR G" ,
+          } ]
+       }` 
+
+### GET `/api/v1/offices/<id>` Getting a political office for a specific id.
+
+* Sample of Expected Response:
+      ` 
+       {
+  		 “status” : 200 ,
+         “data” : [ {
+            “id” : 1 ,
+            “type” : "legislative" ,
+            “name” : "PPR P" ,
+          } ]
+       }`
 
 
 
