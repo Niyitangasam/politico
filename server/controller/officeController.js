@@ -4,8 +4,8 @@ import offices from '../model/office';
 // Create a political office
 const createOffice = (req, res) => {
   const schema = joi.object().keys({
-    type: joi.string().required(),
-    name: joi.string().required(),
+    type: joi.string().regex(/[a-zA-Z]/).min(3).required(),
+    name: joi.string().regex(/[a-zA-Z]/).min(3).required(),
   });
   const result = joi.validate(req.body, schema, {
     abortEarly: false,
@@ -25,7 +25,7 @@ const createOffice = (req, res) => {
     name: req.body.name,
   };
   offices.push(newOffice);
-  return res.status(201).send({ status: 200, data: newOffice });
+  return res.status(201).send({ status: 200, data: [newOffice] });
 };
 
 

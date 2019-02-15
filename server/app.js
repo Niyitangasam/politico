@@ -14,6 +14,10 @@ const port = process.env.PORT || 3000;
 
 app.use('/api/v1/parties', partyRoutes);
 app.use('/api/v1/offices', officeRoutes);
+app.use('*', (req, res) => res.status(400).send({
+  status: res.statusCode,
+  message: 'Wrong URL, Please check it!',
+}));
 app.listen(port, () => console.log(`listening on port ${port}`));
 
-module.exports = app;
+export default app;
