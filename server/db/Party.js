@@ -1,5 +1,7 @@
 import dbCon from '../config/connection';
-import createNewParty from './queries';
+import {
+  getPartyByIDQuery, createNewPartyQuery, retrieveAllparties, deleteParty, updateName,
+} from './queries';
 
 export default class Party {
 // initialize class
@@ -17,7 +19,53 @@ export default class Party {
     } = this.data;
     const values = [name, hqAddress, logoUrl];
     try {
-      const { rows } = await dbCon.query(createNewParty, values);
+      const { rows } = await dbCon.query(createNewPartyQuery, values);
+      this.result = rows;
+      return true;
+    } catch (error) {
+      this.error = error;
+      return false;
+    }
+  }
+
+  async getPartyById() {
+    try {
+      const query = getPartyByIDQuery;
+      const values = [this.data];
+      const { rows } = await dbCon.query(query, values);
+      this.result = rows;
+      return true;
+    } catch (error) {
+      this.error = error;
+      return false;
+    }
+  }
+
+  async getParties() {
+    try {
+      const { rows } = await dbCon.query(retrieveAllparties);
+      this.result = rows;
+      return true;
+    } catch (error) {
+      this.error = error;
+      return false;
+    }
+  }
+
+  async updateName(name) {
+    try {
+      const { rows } = await dbCon.query(updateName(name, this.data));
+      this.result = rows;
+      return true;
+    } catch (error) {
+      this.error = error;
+      return false;
+    }
+  }
+
+  async deleteParty() {
+    try {
+      const { rows } = await dbCon.query(deleteParty, [this.data]);
       this.result = rows;
       return true;
     } catch (error) {
