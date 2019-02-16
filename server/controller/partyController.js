@@ -1,41 +1,32 @@
-
-import joi from 'joi';
+import Helper from '../Helper/Helper';
+import Model from '../db/Party';
 import parties from '../model/party';
 
 // create a party
-const createParty = (req, res) => {
+const createParty = async (req, res) => {
   const data = req.body;
-
-  const schema = joi.object().keys({
-    name: joi.string().regex(/[a-zA-Z]/).min(3).max(40)
-      .required(),
-    hqAddress: joi.string().min(3).max(60).required(),
-    logoUrl: joi.string().min(5).max(200).required(),
-  });
-  const result = joi.validate(data, schema, {
-    abortEarly: false,
-  });
-  if (result.error != null) {
-    const errors = [];
-    for (let index = 0; index < result.error.details.length; index += 1) {
-      errors.push(result.error.details[index].message.split('"').join(' '));
-    }
-    return res.status(422).send({ status: 422, Error: errors });
+  const result = Helper.isValidParty(data);
+  if (result.error) {
+    return Helper.invalidDataMessage(res, result);
   }
 
-  const newParty = {
-    id: parties.length + 1,
-    name: data.name,
-    hqAddress: data.hqAddress,
-    logoUrl: data.logoUrl,
-  };
-  parties.push(newParty);
+  const AddPartyQuery = new Model(data);
+  if (!await AddPartyQuery.createNewParty()) return res.status(400).send({ status: 400, Error: 'Unable to create Party' });
 
-  const response = {
-    id: newParty.id,
-    name: newParty.name,
-  };
-  return res.status(201).send({ status: 201, data: [response] });
+  return res.status(201).send({ status: 201, data: AddPartyQuery.result });
+  // const newParty = {
+  //   id: parties.length + 1,
+  //   name: data.name,
+  //   hqAddress: data.hqAddress,
+  //   logoUrl: data.logoUrl,
+  // };
+  // parties.push(newParty);
+
+  // const response = {
+  //   id: newParty.id,
+  //   name: newParty.name,
+  // };
+  // return res.status(201).send({ status: 201, data: [response] });
 };
 
 
@@ -74,25 +65,16 @@ const getAllParty = (req, res) => {
 const editPartyName = (req, res) => {
   const party = parties.find(eachParty => eachParty.id === parseInt(req.params.id, 10));
   if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
-  const schema = joi.object().keys({
-    name: joi.string().regex(/[a-zA-Z]/).min(3).required(),
-  });
-  const result = joi.validate(req.body, schema, {
-    abortEarly: false,
-  });
-  if (result.error === null) {
-    party.name = req.body.name;
-    const updatedData = {
-      id: party.id,
-      name: party.name,
-    };
-    return res.send({ status: 200, data: [updatedData] });
+  const result = Helper.isValidPartyName(req.body);
+  if (result.error) {
+    return Helper.invalidDataMessage(res, result);
   }
-  const errors = [];
-  for (let index = 0; index < result.error.details.length; index += 1) {
-    errors.push(result.error.details[index].message.split('"').join(' '));
-  }
-  return res.status(422).send({ status: 422, Error: errors });
+  party.name = req.body.name;
+  const updatedData = {
+    id: party.id,
+    name: party.name,
+  };
+  return res.send({ status: 200, data: [updatedData] });
 };
 
 // Delete a specific political party.
