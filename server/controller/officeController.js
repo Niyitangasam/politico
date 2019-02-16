@@ -1,24 +1,12 @@
-import joi from 'joi';
+import Helper from '../Helper/Helper';
 import offices from '../model/office';
 
 // Create a political office
 const createOffice = (req, res) => {
-  const schema = joi.object().keys({
-    type: joi.string().regex(/[a-zA-Z]/).min(3).required(),
-    name: joi.string().regex(/[a-zA-Z]/).min(3).required(),
-  });
-  const result = joi.validate(req.body, schema, {
-    abortEarly: false,
-  });
-
-  if (result.error != null) {
-    const errors = [];
-    for (let index = 0; index < result.error.details.length; index += 1) {
-      errors.push(result.error.details[index].message.split('"').join(' '));
-    }
-    return res.status(422).send({ status: 422, Error: errors });
+  const result = Helper.isValidOffice(req.body);
+  if (result.error) {
+    return Helper.invalidDataMessage(res, result);
   }
-
   const newOffice = {
     id: offices.length + 1,
     type: req.body.type,
