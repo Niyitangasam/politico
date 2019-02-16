@@ -35,8 +35,8 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
   const RetrieveOneOfficeQuery = new ModelOffice(id);
-  if (!await RetrieveOneOfficeQuery.getOfficeById()) return res.status(400).send({ status: 400, Error: 'Unable to get Office' });
-
+  if (!await RetrieveOneOfficeQuery.getOfficeById()) return res.status(500).send({ status: 500, Error: 'Error in getting data' });
+  if (RetrieveOneOfficeQuery.result.length === 0) return res.status(404).send({ status: 404, Error: 'Records not found' });
   return res.status(200).send({ status: 200, data: RetrieveOneOfficeQuery.result });
   /* const office = offices.find(off => off.id === parseInt(req.params.id, 10));
   if (!office) return res.status(404).

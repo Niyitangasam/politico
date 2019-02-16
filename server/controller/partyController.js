@@ -35,8 +35,8 @@ const createParty = async (req, res) => {
 const getOnlyOne = async (req, res) => {
   const { id } = req.params;
   const RetrieveOneQuery = new Model(id);
-  if (!await RetrieveOneQuery.getPartyById()) return res.status(400).send({ status: 400, Error: 'Unable to get Party' });
-
+  if (!await RetrieveOneQuery.getPartyById()) return res.status(500).send({ status: 500, Error: 'Error in getting data' });
+  if (RetrieveOneQuery.result.length === 0) return res.status(404).send({ status: 404, Error: 'Records not found' });
   return res.status(200).send({ status: 200, data: RetrieveOneQuery.result });
 
   /* const party = parties.find(p => p.id === parseInt(req.params.id, 10));
@@ -55,7 +55,8 @@ const getOnlyOne = async (req, res) => {
 
 const getAllParty = async (req, res) => {
   const GetAllQuery = new Model();
-  if (!await GetAllQuery.getParties()) return res.status(400).send({ status: 400, Error: 'Unable to retrieve all!' });
+  if (!await GetAllQuery.getParties()) return res.status(500).send({ status: 500, Error: 'Error in retriving data' });
+  if (GetAllQuery.result.length === 0) return res.send({ status: 404, Error: 'Records not found' });
   return res.send({ status: 200, data: GetAllQuery.result });
 
 /*  const response = [];
@@ -78,7 +79,7 @@ const editPartyName = async (req, res) => {
   }
   const { name } = req.body;
   const EditNameQuery = new Model(parseInt(req.params.id, 10));
-  if (!await EditNameQuery.getPartyById()) return res.send({ status: 500, Error: 'Error in retriving data' });
+  if (!await EditNameQuery.getPartyById()) return res.status(500).send({ status: 500, Error: 'Error in retriving data' });
   if (EditNameQuery.result.length === 0) return res.send({ status: 404, Error: 'Record not found' });
   if (!await EditNameQuery.updateName(name)) return res.send({ status: 500, Error: 'Unable to Edit it' });
   return res.send({ status: 200, data: EditNameQuery.result });
@@ -96,7 +97,7 @@ const editPartyName = async (req, res) => {
 // Delete a specific political party.
 const deleteParty = async (req, res) => {
   const DeletePartyQuery = new Model(parseInt(req.params.id, 10));
-  if (!await DeletePartyQuery.getPartyById()) return res.send({ status: 500, Error: 'Error in retriving data' });
+  if (!await DeletePartyQuery.getPartyById()) return res.status(500).send({ status: 500, Error: 'Error in retriving data' });
   if (DeletePartyQuery.result.length === 0) return res.send({ status: 404, Error: 'Record not found' });
   if (!await DeletePartyQuery.deleteParty()) return res.send({ status: 404, Error: 'Unable to delete it, Try Again' });
   return res.send({ status: 200, message: ['Party Deleted'] });
