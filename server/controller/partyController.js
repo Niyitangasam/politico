@@ -35,7 +35,7 @@ const createParty = async (req, res) => {
 const getOnlyOne = async (req, res) => {
   const { id } = req.params;
   const RetrieveOneQuery = new Model(id);
-  if (!await RetrieveOneQuery.getPartyById()) return res.status(400).send({ status: 400, Error: 'Unable to create Party' });
+  if (!await RetrieveOneQuery.getPartyById()) return res.status(400).send({ status: 400, Error: 'Unable to get Party' });
 
   return res.status(200).send({ status: 200, data: RetrieveOneQuery.result });
 
