@@ -1,6 +1,6 @@
 import Helper from '../Helper/Helper';
 import Model from '../db/Party';
-import parties from '../model/party';
+
 
 // create a party
 const createParty = async (req, res) => {
@@ -32,24 +32,33 @@ const createParty = async (req, res) => {
 
 // Fetch a specific political party record.
 
-const getOnlyOne = (req, res) => {
-  const party = parties.find(p => p.id === parseInt(req.params.id, 10));
-  if (!party) return res.status(404).send({ status: 404, Error: 'The party with given ID was not found' });
-  const response = {
+const getOnlyOne = async (req, res) => {
+  const { id } = req.params;
+  const RetrieveOneQuery = new Model(id);
+  if (!await RetrieveOneQuery.getPartyById()) return res.status(400).send({ status: 400, Error: 'Unable to create Party' });
+
+  return res.status(200).send({ status: 200, data: RetrieveOneQuery.result });
+
+  /* const party = parties.find(p => p.id === parseInt(req.params.id, 10));
+    if (!party) return res.status(404)
+    .send({ status: 404, Error: 'The party with given ID was not found' });
+    const response = {
     id: party.id,
     name: party.name,
     logoUrl: party.logoUrl,
   };
-  return res.send({ status: 200, data: [response] });
+  return res.send({ status: 200, data: [response] }); */
 };
 
 
 // Fetch all political parties records
 
-const getAllParty = (req, res) => {
-  const response = [];
+const getAllParty = async (req, res) => {
+  const GetAllQuery = new Model();
+  if (!await GetAllQuery.getParties()) return res.status(400).send({ status: 400, Error: 'Unable to retrieve all!' });
+  return res.send({ status: 200, data: GetAllQuery.result });
 
-
+/*  const response = [];
   for (let index = 0; index < parties.length; index += 1) {
     const party = {
       id: parties[index].id,
@@ -58,32 +67,45 @@ const getAllParty = (req, res) => {
     };
     response.push(party);
   }
-  return res.send({ status: 200, data: response });
+  return res.send({ status: 200, data: response }); */
 };
 
 // Edit the name of a specific political party
-const editPartyName = (req, res) => {
-  const party = parties.find(eachParty => eachParty.id === parseInt(req.params.id, 10));
-  if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
+const editPartyName = async (req, res) => {
   const result = Helper.isValidPartyName(req.body);
   if (result.error) {
     return Helper.invalidDataMessage(res, result);
   }
+  const { name } = req.body;
+  const EditNameQuery = new Model(parseInt(req.params.id, 10));
+  if (!await EditNameQuery.getPartyById()) return res.send({ status: 500, Error: 'Error in retriving data' });
+  if (EditNameQuery.result.length === 0) return res.send({ status: 404, Error: 'Record not found' });
+  if (!await EditNameQuery.updateName(name)) return res.send({ status: 500, Error: 'Unable to Edit it' });
+  return res.send({ status: 200, data: EditNameQuery.result });
+
+/* const party = parties.find(eachParty => eachParty.id === parseInt(req.params.id, 10));
+  if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
   party.name = req.body.name;
   const updatedData = {
     id: party.id,
     name: party.name,
   };
-  return res.send({ status: 200, data: [updatedData] });
+  return res.send({ status: 200, data: [updatedData] }); */
 };
 
 // Delete a specific political party.
-const deleteParty = (req, res) => {
-  const party = parties.find(eachParty => eachParty.id === parseInt(req.params.id, 10));
-  if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
+const deleteParty = async (req, res) => {
+  const DeletePartyQuery = new Model(parseInt(req.params.id, 10));
+  if (!await DeletePartyQuery.getPartyById()) return res.send({ status: 500, Error: 'Error in retriving data' });
+  if (DeletePartyQuery.result.length === 0) return res.send({ status: 404, Error: 'Record not found' });
+  if (!await DeletePartyQuery.deleteParty()) return res.send({ status: 404, Error: 'Unable to delete it, Try Again' });
+  return res.send({ status: 200, message: ['Party Deleted'] });
+
+  /* const party = parties.find(eachParty => eachParty.id === parseInt(req.params.id, 10));
+   if (!party) return res.send({ status: 404, Error: 'The party with given ID was not found' });
   const index = parties.indexOf(party);
   parties.splice(index, 1);
-  return res.send({ status: 200, message: ['Party Deleted'] });
+  return res.send({ status: 200, message: ['Party Deleted'] }); */
 };
 
 export {

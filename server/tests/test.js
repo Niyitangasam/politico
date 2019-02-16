@@ -14,7 +14,7 @@ chai.use(chaiHttp);
 const newParty = {
   "name": "partyA",
   "hqAddress": "Kigali",
-  "logoUrl": "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjl",
+  "logoUrl": "https://www.google.com/url?sa=i&sourcd=2ahUKEwjl",
 };
 const newOffice = {
   "type": "Legislative",
