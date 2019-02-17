@@ -3,32 +3,56 @@ import Joi from 'joi';
 class Helper {
   // Check if it is a valid party
 
-  static isValidParty(data) {
+  static isValidParty(party) {
     const schema = Joi.object().keys({
       name: Joi.string().regex(/[a-zA-Z]/).min(3).max(40)
         .required(),
       hqAddress: Joi.string().min(3).max(60).required(),
       logoUrl: Joi.string().uri().required(),
     });
-    return Joi.validate(data, schema);
+    return Joi.validate(party, schema);
   }
 
   // check updated party name if it is valid
 
-  static isValidPartyName(data) {
+  static isValidPartyName(partyName) {
     const schema = Joi.object().keys({
       name: Joi.string().regex(/[a-zA-Z]/).min(3).required(),
     });
-    return Joi.validate(data, schema);
+    return Joi.validate(partyName, schema);
   }
 
   // check if it is valid office
-  static isValidOffice(data) {
+  static isValidOffice(office) {
     const schema = Joi.object().keys({
       type: Joi.string().regex(/[a-zA-Z]/).min(3).required(),
       name: Joi.string().regex(/[a-zA-Z]/).min(3).required(),
     });
-    return Joi.validate(data, schema);
+    return Joi.validate(office, schema);
+  }
+
+
+  static isValidUser(user) {
+    const schema = {
+      firstname: Joi.string().min(5).required(),
+      lastname: Joi.string().min(5).required(),
+      othername: Joi.string().min(5),
+      email: Joi.string().email().min(5).required(),
+      phoneNumber: Joi.string().min(5).required(),
+      passportUrl: Joi.string().uri().required(),
+      password: Joi.string().min(5).required(),
+      isAdmin: Joi.boolean().default(false),
+    };
+    return Joi.validate(user, schema);
+  }
+
+
+  static isValidlogin(login) {
+    const schema = {
+      email: Joi.string().email().min(5).required(),
+      password: Joi.string().min(5).required(),
+    };
+    return Joi.validate(login, schema);
   }
 
   // Invalid data message
