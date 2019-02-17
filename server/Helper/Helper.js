@@ -31,6 +31,15 @@ class Helper {
     return Joi.validate(office, schema);
   }
 
+  static validateCandidate(candidate) {
+    const schema = Joi.object().keys({
+      office: Joi.Integer,
+      party: Joi.Integer,
+      candidate: Joi.Integer,
+    });
+    return Joi.validate(candidate, schema);
+  }
+
 
   static isValidUser(user) {
     const schema = {

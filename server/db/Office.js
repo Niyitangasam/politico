@@ -1,5 +1,7 @@
 import dbCon from '../config/connection';
-import { createNewOfficeQuery, getAlloffices, getOfficeByIDQuery } from './queries';
+import {
+  createNewOfficeQuery, getAlloffices, getOfficeByIDQuery, registerCandiateQuery,
+} from './queries';
 
 export default class Office {
 // initialize class
@@ -40,6 +42,19 @@ export default class Office {
     try {
       const values = [this.data];
       const { rows } = await dbCon.query(getOfficeByIDQuery, values);
+      this.result = rows;
+      return true;
+    } catch (error) {
+      this.error = error;
+      return false;
+    }
+  }
+
+  async registerCandidate() {
+    const { office, party, candidate } = this.data;
+    const values = [office, party, candidate];
+    try {
+      const { rows } = await dbCon.query(registerCandiateQuery, values);
       this.result = rows;
       return true;
     } catch (error) {

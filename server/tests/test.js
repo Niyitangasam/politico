@@ -27,10 +27,12 @@ const newOffice = {
 const newName ={
   "name": "Butare",
 };
-
+let partyID = null;
+let officeID = null;
 let tokenAdmin = null; 
 let tokenUser = null; 
 before((done) =>{
+
   const userLogins = {
     email : 'niksam@gmail.com',
     password :'niyitanga',
@@ -39,6 +41,7 @@ before((done) =>{
    email : 'niyitangasam@gmail.com',
    password :'niyitanga', 
   }
+
 
   chai.request(app).post('/api/v1/auth/login').send(userLogins)
     .end((err, res)=> {
@@ -54,8 +57,9 @@ before((done) =>{
 
 describe('POST /parties', () => {
   it('It should add new party and return an object with a status code and a new part created', (done) => {
-    chai.request(app).post('/api/v1/parties/').set('authorization',tokenAdmin).send(newParty).end((err, res) => {
-      
+    chai.request(app).post('/api/v1/parties/').set('authorization',tokenAdmin).send(newParty).end((err, res) => { 
+      partyID = res.body.data[0].id_party;
+      console.log(partyID);
       expect(res).to.have.status(201);
       expect(res.body).to.have.property('data').and.to.be.an('array');
       expect(res.body.status).to.be.a('number').and.to.equal(201);
@@ -66,7 +70,7 @@ describe('POST /parties', () => {
 
 describe('GET /parties/<party-id>', () => {
   it('It should get party by id ', (done) => {
-    chai.request(app).get('/api/v1/parties/1').set('authorization',tokenAdmin).end((err, res) => {
+    chai.request(app).get(`/api/v1/parties/${partyID}`).set('authorization',tokenAdmin).end((err, res) => {
        console.log(`the body is ${res.body}`);
       expect(res).to.have.status(200);
       done();
@@ -122,6 +126,8 @@ describe('POST /offices', () => {
 describe('GET /offices', () => {
   it('It should return all offices', (done) => {
     chai.request(app).get('/api/v1/offices').set('authorization',tokenUser).end((err, res) => {
+      officeID = res.body.data[0].id_office;
+      console.log(officeID);
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data').and.to.be.an('array');
       done();
@@ -129,9 +135,9 @@ describe('GET /offices', () => {
   });
 });
 
-describe('GET /offices/<office-id>', () => {
+describe(`GET /offices/<office-id>`, () => {
   it('It should fetch office by id ', (done) => {
-    chai.request(app).get('/api/v1/offices/1').set('authorization',tokenAdmin).end((err, res) => {
+    chai.request(app).get(`/api/v1/offices/${officeID}`).set('authorization',tokenAdmin).end((err, res) => {
       expect(res).to.have.status(200);
       done();
     });

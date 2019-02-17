@@ -10,6 +10,7 @@ export const updateName = (name, partyId) => `UPDATE parties SET name= '${name}'
 export const createNewOfficeQuery = 'INSERT INTO offices(type, name) VALUES($1, $2) returning *';
 export const getAlloffices = 'SELECT * FROM offices';
 export const getOfficeByIDQuery = 'SELECT * FROM offices WHERE id_office= $1';
+export const registerCandiateQuery = 'INSERT INTO offices(office_id, party_id, user_id) VALUES($1, $2, $3) returning *';
 
 // Use queries
 

@@ -44,4 +44,18 @@ const getById = async (req, res) => {
    return res.send({ status: 200, data: office }); */
 };
 
-export { createOffice, getAll, getById };
+const registerCandidate = async (req, res) => {
+  const result = Helper.validateCandidat(req.body);
+  if (result.error) {
+    return Helper.invalidDataMessage(res, result);
+  }
+
+  const AddCandidateQuery = new ModelOffice(req.body);
+  if (!await AddCandidateQuery.createNewOffice()) return res.status(400).send({ status: 400, Error: 'Unable to create newOffice' });
+
+  return res.status(201).send({ status: 201, data: AddCandidateQuery.result });
+};
+
+export {
+  createOffice, getAll, getById, registerCandidate,
+};
