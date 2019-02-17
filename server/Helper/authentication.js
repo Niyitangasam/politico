@@ -6,10 +6,10 @@ export const encryptPass = password => bcrypt.hashSync(password, bcrypt.genSaltS
 
 export const checkPassword = (hash, password) => bcrypt.compareSync(password, hash);
 
-export const generateToken = (id) => {
+export const generateToken = (Userid) => {
   const token = jwt.sign({
-    userId: id,
+    userId: Userid,
   },
-  process.env.JWT_SECRET, { expiresIn: '7d' });
+  process.env.JWT_SECRET);
   return token;
 };
