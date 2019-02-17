@@ -174,3 +174,7 @@ Starting application, Run:
 
 Access link :[Visit the link](https://politico-samuel.herokuapp.com/). You can test the above API endpoints using this  URL `https://politico-samuel.herokuapp.com/`.
 
+
+# Author
+
+[Samuel N Niyitanga](https://github.com/Niyitangasam)
