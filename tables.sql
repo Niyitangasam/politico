@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS users
       lastname VARCHAR(50) NOT NULL,
       othername VARCHAR(50) NOT NULL,
       email VARCHAR(50) NOT NULL UNIQUE,
+      password VARCHAR(100) NOT NULL,
       phone_number VARCHAR(50) NOT NULL,
       passport_url VARCHAR(50) NOT NULL,
       isAdmin BOOLEAN
