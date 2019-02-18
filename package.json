@@ -5,9 +5,11 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
+    "database": "babel-node ./server/config/tables.js --",
     "heroku": "babel-node ./server/app.js",
-    "test": " nyc mocha \"./server/tests/*.js\" --require @babel/register --require @babel/polyfill --exit ",
+    "test": " npm run database && nyc mocha \"./server/tests/*.js\" --require @babel/register --require @babel/polyfill --exit ",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
+
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
     "express": "^4.16.4",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.4.0",
+    "make-runnable": "^1.3.6",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
     "pg": "^7.8.0"
