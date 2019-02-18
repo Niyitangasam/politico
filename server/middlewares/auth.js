@@ -19,7 +19,7 @@ const verifyToken = async (req, res, next) => {
   if (!token) return res.status(403).send({ status: 403, error: 'No token provided' });
   try {
     const decodedToken = await JWT.verify(token, process.env.JWT_SECRET);
-    const { rows } = await dbCon.query('SELECT * FROM users WHERE id_user= $1', [decodedToken.userId]);
+    const { rows } = await dbCon.query('SELECT * FROM users WHERE id_user= $1', [decodedToken.userEmail]);
     if (!rows) return res.status(403).send({ status: 403, error: 'Failed to authenticate token' });
     req.user = rows;
     next();
