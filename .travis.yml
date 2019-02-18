@@ -4,7 +4,8 @@ node_js:
 services:
 - postgresql
 env:
-- NODE_ENV=test
+  global:
+- JWT_SECRET ='niyitangasamueldoingandelachallenge'
 before_script:
 - psql -c 'create database politico;' -U postgres
 - psql -c "CREATE USER root WITH PASSWORD 'password';" -U postgres
