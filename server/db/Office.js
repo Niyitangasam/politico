@@ -1,6 +1,6 @@
 import dbCon from '../config/connection';
 import {
-  createNewOfficeQuery, getAlloffices, getOfficeByIDQuery, registerCandiateQuery,
+  createNewOfficeQuery, getAlloffices, getOfficeByIDQuery, registerCandidateQuery,
 } from './queries';
 
 export default class Office {
@@ -54,7 +54,7 @@ export default class Office {
     const { office, party, candidate } = this.data;
     const values = [office, party, candidate];
     try {
-      const { rows } = await dbCon.query(registerCandiateQuery, values);
+      const { rows } = await dbCon.query(registerCandidateQuery, values);
       this.result = rows;
       return true;
     } catch (error) {

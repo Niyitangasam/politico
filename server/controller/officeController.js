@@ -45,14 +45,18 @@ const getById = async (req, res) => {
 };
 
 const registerCandidate = async (req, res) => {
-  const result = Helper.validateCandidat(req.body);
+  const result = Helper.validateCandidate(req.body);
   if (result.error) {
     return Helper.invalidDataMessage(res, result);
   }
 
   const AddCandidateQuery = new ModelOffice(req.body);
-  if (!await AddCandidateQuery.createNewOffice()) return res.status(400).send({ status: 400, Error: 'Unable to create newOffice' });
-
+  if (!await AddCandidateQuery.registerCandidate()) {
+    return res.status(422)
+      .send({
+        status: 422, Error: [AddCandidateQuery.error.detail],
+      });
+  }
   return res.status(201).send({ status: 201, data: AddCandidateQuery.result });
 };
 
