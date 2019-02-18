@@ -1,9 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import config from 'dotenv';
 
 import partyRoutes from './routes/partyRoutes';
 import officeRoutes from './routes/officeRoutes';
 import userRoutes from './routes/userRoutes';
+
+
+config.config();
 
 const app = express();
 
