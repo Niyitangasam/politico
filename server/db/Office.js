@@ -1,5 +1,4 @@
 import dbCon from '../config/connection';
-import { createNewOfficeQuery, getAlloffices, getOfficeByIDQuery } from './queries';
 
 export default class Office {
 // initialize class
@@ -16,7 +15,7 @@ export default class Office {
     const { type, name } = this.data;
     const values = [type, name];
     try {
-      const { rows } = await dbCon.query(createNewOfficeQuery, values);
+      const { rows } = await dbCon.query('INSERT INTO offices(type, name) VALUES($1, $2) returning *', values);
       this.result = rows;
       return true;
     } catch (error) {
@@ -27,7 +26,7 @@ export default class Office {
 
   async getOffices() {
     try {
-      const { rows } = await dbCon.query(getAlloffices);
+      const { rows } = await dbCon.query('SELECT * FROM offices');
       this.result = rows;
       return true;
     } catch (error) {
@@ -39,7 +38,20 @@ export default class Office {
   async getOfficeById() {
     try {
       const values = [this.data];
-      const { rows } = await dbCon.query(getOfficeByIDQuery, values);
+      const { rows } = await dbCon.query('SELECT * FROM offices WHERE id_office= $1', values);
+      this.result = rows;
+      return true;
+    } catch (error) {
+      this.error = error;
+      return false;
+    }
+  }
+
+  async registerCandidate() {
+    const { office, party, candidate } = this.data;
+    const values = [office, party, candidate];
+    try {
+      const { rows } = await dbCon.query('INSERT INTO candidates(office_id, party_id, user_id) VALUES($1, $2, $3) returning *', values);
       this.result = rows;
       return true;
     } catch (error) {

@@ -17,7 +17,7 @@ app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/parties', partyRoutes);
 app.use('/api/v1/offices', officeRoutes);
 app.use('*', (req, res) => res.status(404).send({
-  status: res.statusCode,
+  status: 400,
   message: 'Wrong URL, Please check it!',
 }));
 app.listen(port, () => console.log(`listening on port ${port}`));

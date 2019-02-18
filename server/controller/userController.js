@@ -1,6 +1,7 @@
 import Helper from '../Helper/Helper';
 import UserDB from '../db/User';
-import { generateToken, checkPassword } from '../Helper/authentication';
+import { checkPassword } from '../Helper/password';
+import { generateToken } from '../middlewares/auth';
 
 const createUser = async (req, res) => {
   const result = Helper.isValidUser(req.body);

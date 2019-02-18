@@ -1,7 +1,5 @@
 import dbCon from '../config/connection';
-import {
-  getPartyByIDQuery, createNewPartyQuery, retrieveAllparties, deleteParty, updateName,
-} from './queries';
+
 
 export default class Party {
 // initialize class
@@ -19,7 +17,7 @@ export default class Party {
     } = this.data;
     const values = [name, hqAddress, logoUrl];
     try {
-      const { rows } = await dbCon.query(createNewPartyQuery, values);
+      const { rows } = await dbCon.query('INSERT INTO parties(name, hqAddress, logoUrl) VALUES($1, $2, $3) returning *', values);
       this.result = rows;
       return true;
     } catch (error) {
@@ -30,9 +28,8 @@ export default class Party {
 
   async getPartyById() {
     try {
-      const query = getPartyByIDQuery;
       const values = [this.data];
-      const { rows } = await dbCon.query(query, values);
+      const { rows } = await dbCon.query('SELECT * FROM parties WHERE id_party = $1', values);
       this.result = rows;
       return true;
     } catch (error) {
@@ -43,7 +40,7 @@ export default class Party {
 
   async getParties() {
     try {
-      const { rows } = await dbCon.query(retrieveAllparties);
+      const { rows } = await dbCon.query('SELECT * FROM parties');
       this.result = rows;
       return true;
     } catch (error) {
@@ -53,8 +50,9 @@ export default class Party {
   }
 
   async updateName(name) {
+    const partyId =this.data;
     try {
-      const { rows } = await dbCon.query(updateName(name, this.data));
+      const { rows } = await dbCon.query(`UPDATE parties SET name= '${name}' WHERE id_party = ${partyId} returning *`);
       this.result = rows;
       return true;
     } catch (error) {
@@ -65,7 +63,7 @@ export default class Party {
 
   async deleteParty() {
     try {
-      const { rows } = await dbCon.query(deleteParty, [this.data]);
+      const { rows } = await dbCon.query('DELETE FROM parties WHERE id_party = $1', [this.data]);
       this.result = rows;
       return true;
     } catch (error) {

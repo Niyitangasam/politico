@@ -44,4 +44,22 @@ const getById = async (req, res) => {
    return res.send({ status: 200, data: office }); */
 };
 
-export { createOffice, getAll, getById };
+const registerCandidate = async (req, res) => {
+  const result = Helper.validateCandidate(req.body);
+  if (result.error) {
+    return Helper.invalidDataMessage(res, result);
+  }
+
+  const AddCandidateQuery = new ModelOffice(req.body);
+  if (!await AddCandidateQuery.registerCandidate()) {
+    return res.status(422)
+      .send({
+        status: 422, Error: [AddCandidateQuery.error.detail],
+      });
+  }
+  return res.status(201).send({ status: 201, data: AddCandidateQuery.result });
+};
+
+export {
+  createOffice, getAll, getById, registerCandidate,
+};
