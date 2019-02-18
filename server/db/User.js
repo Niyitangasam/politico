@@ -1,6 +1,6 @@
 import dbCon from '../config/connection';
-import { encryptPass } from '../Helper/authentication';
-import { insertUser, getUser } from './queries';
+import { encryptPass } from '../Helper/password';
+
 
 export default class User {
 // A constructor for user class
@@ -19,7 +19,7 @@ export default class User {
     const values = [firstname, lastname, othername, email,
       encryptPass(password), phoneNumber, passportUrl, isAdmin];
     try {
-      const { rows } = await dbCon.query(insertUser, values);
+      const { rows } = await dbCon.query('INSERT INTO users(firstname, lastname, othername, email, password, phone_number, passport_url, isAdmin) VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning *', values);
       this.result = rows;
       return true;
     } catch (error) {
@@ -31,7 +31,7 @@ export default class User {
   async fetchUser() {
     const { email } = this.data;
     try {
-      const { rows, rowCount } = await dbCon.query(getUser, [email]);
+      const { rows, rowCount } = await dbCon.query('SELECT * FROM users WHERE email= $1', [email]);
       this.result = rows;
       this.rowCount = rowCount;
       return true;

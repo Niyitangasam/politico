@@ -1,6 +1,17 @@
 import JWT from 'jsonwebtoken';
 import dbCon from '../config/connection';
 
+// Generate Token
+
+const generateToken = (email) => {
+  const token = JWT.sign({
+    userEmail: email,
+  },
+  process.env.JWT_SECRET);
+  return token;
+};
+
+
 // check token
 
 const verifyToken = async (req, res, next) => {
@@ -26,4 +37,4 @@ const checkAdminAccess = async (req, res, next) => {
 };
 
 
-export { verifyToken, checkAdminAccess };
+export { verifyToken, checkAdminAccess, generateToken };
