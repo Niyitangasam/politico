@@ -44,6 +44,7 @@ const getById = async (req, res) => {
    return res.send({ status: 200, data: office }); */
 };
 
+
 const registerCandidate = async (req, res) => {
   const result = Helper.validateCandidate(req.body);
   if (result.error) {
