@@ -1,8 +1,11 @@
 language: node_js
 node_js: 
   - "stable"
-addons:
-  postgresql: "11.2"
+services:
+- postgresql
+before_script:
+- psql -c 'create database politico;' -U postgres
+- psql -c "CREATE USER root WITH PASSWORD 'password';" -U postgres
 cache:
   directories:
     - "node_modules"
