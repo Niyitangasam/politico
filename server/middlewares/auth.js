@@ -10,8 +10,6 @@ const generateToken = (email) => {
   process.env.JWT_SECRET);
   return token;
 };
-
-
 // check token
 
 const verifyToken = async (req, res, next) => {
