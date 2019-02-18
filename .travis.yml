@@ -3,8 +3,6 @@ node_js:
   - "stable"
 addons:
   postgresql: "11.2"
-before_install:
-  - psql -U postgres -f tables.sql
 cache:
   directories:
     - "node_modules"
