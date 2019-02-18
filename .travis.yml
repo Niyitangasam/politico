@@ -1,8 +1,8 @@
-services:
-  - postgresql
 language: node_js
 node_js: 
   - "stable"
+addons:
+  postgresql: "11.2"
 cache:
   directories:
     - "node_modules"
