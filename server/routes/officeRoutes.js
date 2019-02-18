@@ -10,4 +10,4 @@ router.get('/', verifyToken, getAll);
 router.get('/:id', verifyToken, getById);
 router.post('/:id/register', [verifyToken, checkAdminAccess], registerCandidate);
 
-module.exports = router;
+export default router;

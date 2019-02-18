@@ -5,6 +5,7 @@ import config from 'dotenv';
 import partyRoutes from './routes/partyRoutes';
 import officeRoutes from './routes/officeRoutes';
 import userRoutes from './routes/userRoutes';
+import voteRoutes from './routes/voteRoutes';
 
 
 config.config();
@@ -20,6 +21,7 @@ const port = process.env.PORT || 3000;
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/parties', partyRoutes);
 app.use('/api/v1/offices', officeRoutes);
+app.use('/api/v1/votes', voteRoutes);
 app.use('*', (req, res) => res.status(404).send({
   status: 400,
   message: 'Wrong URL, Please check it!',
