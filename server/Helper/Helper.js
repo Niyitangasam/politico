@@ -33,9 +33,9 @@ class Helper {
 
   static validateCandidate(candidate) {
     const schema = Joi.object().keys({
-      office: Joi.number().integer(),
-      party: Joi.number().integer(),
-      candidate: Joi.number().integer(),
+      office: Joi.number().integer().required(),
+      party: Joi.number().integer().required(),
+      candidate: Joi.number().integer().required(),
     });
     return Joi.validate(candidate, schema);
   }
@@ -53,6 +53,16 @@ class Helper {
       isAdmin: Joi.boolean().default(false),
     };
     return Joi.validate(user, schema);
+  }
+
+  static validateVote(vote) {
+    const schema = Joi.object().keys({
+      createdOn: Joi.date().required(),
+      createdBy: Joi.number().integer().required(),
+      office: Joi.number().integer().required(),
+      candidate: Joi.number().integer().required(),
+    });
+    return Joi.validate(vote, schema);
   }
 
 
