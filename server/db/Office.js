@@ -37,8 +37,8 @@ export default class Office {
 
   async getOfficeById() {
     try {
-      const values = [this.data];
-      const { rows } = await dbCon.query('SELECT * FROM offices WHERE id_office= $1', values);
+      const value = [this.data];
+      const { rows } = await dbCon.query('SELECT * FROM offices WHERE id_office= $1', value);
       this.result = rows;
       return true;
     } catch (error) {
@@ -56,6 +56,25 @@ export default class Office {
       return true;
     } catch (error) {
       this.error = error;
+      return false;
+    }
+  }
+
+  async getResults() {
+    const value = this.data;
+    const dataToReturn = [];
+    try {
+      const { rows } = await dbCon.query('SELECT  office ,candidate, CAST(COUNT(*)AS Int) AS result FROM votes GROUP BY candidate, office ');
+      for (let votes = 0; votes < rows.length; votes += 1) {
+        if (rows[votes].office === parseInt(value, 10)) {
+          dataToReturn.push(rows[votes]);
+        }
+      }
+      this.result = dataToReturn;
+      return true;
+    } catch (error) {
+      this.error = error;
+      console.log(this.error);
       return false;
     }
   }
