@@ -23,6 +23,7 @@ const logIn = async (req, res) => {
   }
   const loginUserQuery = new UserDB(req.body);
   if (await loginUserQuery.fetchUser() && await loginUserQuery.rowCount === 0) return res.status(404).send({ status: 404, error: 'User Not found' });
+  console.log('@@@@@@@@@', result);
   const user = await loginUserQuery.result[0];
   if (!checkPassword(user.password, req.body.password)) return res.status(401).send({ status: 401, error: 'Incorrect Email or password' });
   const token = generateToken(user.email);
