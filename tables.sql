@@ -1,8 +1,8 @@
 
-DROP DATABASE IF EXISTS politico;
-CREATE DATABASE politico;
+-- DROP DATABASE IF EXISTS politico;
+-- CREATE DATABASE politico;
 
-\c politico;
+-- \c politico;
 
 CREATE TABLE IF NOT EXISTS parties
     (

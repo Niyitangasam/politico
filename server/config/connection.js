@@ -4,7 +4,11 @@ import { Pool } from 'pg';
 dotenv.config();
 
 const pool = new Pool({
-  connectionString: process.env.LOCAL_DB_URL,
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DB,
+  password: process.env.PG_PASSWORD,
+  port: 5432,
 });
 // pool.on('connect', () => console.log('DB CONNECTED#'));
 
