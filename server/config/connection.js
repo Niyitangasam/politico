@@ -10,6 +10,6 @@ const pool = new Pool({
   password: process.env.PG_PASSWORD,
   port: 5432,
 });
-// pool.on('connect', () => console.log('DB CONNECTED#'));
+pool.on('connect', () => console.log('DB CONNECTED#'));
 
 export default pool;
