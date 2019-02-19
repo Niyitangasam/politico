@@ -61,6 +61,13 @@ const registerCandidate = async (req, res) => {
   return res.status(201).send({ status: 201, data: AddCandidateQuery.result });
 };
 
+const getOfficesResult = async (req, res) => {
+  const getResultQuery = new ModelOffice(req.params.id);
+  if (!await getResultQuery.getResults()) return res.status(500).send({ status: 500, Error: 'Error in getting data' });
+  if (getResultQuery.result.length === 0) return res.status(404).send({ status: 404, Error: 'Records not found' });
+  return res.status(200).send({ status: 200, data: getResultQuery.result });
+};
+
 export {
-  createOffice, getAll, getById, registerCandidate,
+  createOffice, getAll, getById, registerCandidate, getOfficesResult,
 };
