@@ -11,7 +11,7 @@ const createParty = async (req, res) => {
   }
 
   const AddPartyQuery = new Model(data);
-  if (!await AddPartyQuery.createNewParty()) return res.status(400).send({ status: 400, Error: 'Unable to create Party' });
+  if (!await AddPartyQuery.createNewParty()) return res.status(500).send({ status: 500, Error: 'Internal error' });
 
   return res.status(201).send({ status: 201, data: AddPartyQuery.result });
   // const newParty = {

@@ -5,7 +5,7 @@ services:
 - postgresql
 env:
   global:
-- JWT_SECRET ='niyitangasamueldoingandelachallenge'
+- JWT_SECRET=niyitangasamueldoingandelachallenge
 before_script:
 - psql -c 'create database politico;' -U postgres
 - psql -c "CREATE USER root WITH PASSWORD 'password';" -U postgres

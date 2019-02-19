@@ -9,7 +9,9 @@ const createUser = async (req, res) => {
     return Helper.invalidDataMessage(res, result);
   }
   const createUserQuery = new UserDB(req.body);
-  if (await createUserQuery.fetchUser() && await createUserQuery.rowCount > 0) return res.status(409).send({ status: 409, error: 'Email Already Exist' });
+  if (await createUserQuery.fetchUser() && await createUserQuery.rowCount > 0) {
+    return res.status(409).send({ status: 409, error: 'Email Already Exist' });
+  }
   if (!await createUserQuery.createNewUser()) return res.status(500).send({ status: 500, error: 'Internal Error, Please Try Again' });
   const user = createUserQuery.result;
   const token = generateToken(user.email);
