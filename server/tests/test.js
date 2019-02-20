@@ -4,10 +4,6 @@ import chai from 'chai';
 import  chaiHttp from'chai-http';
 import  app from '../app';
 
-import Party from '../model/party';
-import Office from '../model/office';
-
-
 
 chai.use(chaiHttp);
 

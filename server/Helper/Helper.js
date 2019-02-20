@@ -33,7 +33,6 @@ class Helper {
 
   static validateCandidate(candidate) {
     const schema = Joi.object().keys({
-      office: Joi.number().integer().required(),
       party: Joi.number().integer().required(),
       candidate: Joi.number().integer().required(),
     });
@@ -65,13 +64,33 @@ class Helper {
     return Joi.validate(vote, schema);
   }
 
+  static validatePetition(petition) {
+    const schema = Joi.object().keys({
+      createdBy: Joi.number().integer().required(),
+      office: Joi.number().integer().required(),
+      body: Joi.string().min(5).required(),
+      evidence: Joi.string().uri().required(),
+    });
+    return Joi.validate(petition, schema);
+  }
 
+
+  // Validate Logins
   static isValidlogin(login) {
     const schema = {
       email: Joi.string().email().min(5).required(),
       password: Joi.string().min(5).required(),
     };
     return Joi.validate(login, schema);
+  }
+
+  // Validate Emails
+
+  static isValidEmail(email) {
+    const schema = {
+      email: Joi.string().email().min(5).required(),
+    };
+    return Joi.validate(email, schema);
   }
 
   // Invalid data message

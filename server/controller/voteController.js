@@ -1,5 +1,5 @@
 import Helper from '../Helper/Helper';
-import ModelVote from '../db/Vote';
+import ModelVote from '../model/vote';
 
 
 const saveVote = async (req, res) => {
@@ -15,6 +15,6 @@ const saveVote = async (req, res) => {
         status: 422, Error: [AddVoteQuery.error.detail],
       });
   }
-  return res.status(201).send({ status: 201, data: AddVoteQuery.result });
+  return res.status(201).send({ status: 201, message: 'Voted successfully', data: AddVoteQuery.result });
 };
 export default saveVote;

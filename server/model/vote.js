@@ -1,11 +1,26 @@
-const Vote = [
-  {
-    id: 1,
-    createdOn: '12/1/2019',
-    createdBy: 1,
-    office: 1,
-    candidate: 1,
-  },
-];
+import dbCon from '../config/connection';
 
-module.exports = Vote;
+export default class vote {
+// initialize class
+
+  constructor(data = null) {
+    this.data = data;
+    this.result = null;
+    this.error = null;
+  }
+
+  async voteCandidate() {
+    const {
+      createdOn, createdBy, office, candidate,
+    } = this.data;
+    const values = [createdOn, createdBy, office, candidate];
+    try {
+      const { rows } = await dbCon.query('INSERT INTO votes(createdOn, createdBy, office, candidate) VALUES($1, $2, $3, $4) returning office, candidate, createdBy As voter', values);
+      this.result = rows;
+      return true;
+    } catch (error) {
+      this.error = error;
+      return false;
+    }
+  }
+}
