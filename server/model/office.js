@@ -1,6 +1,6 @@
 import dbCon from '../config/connection';
 
-export default class Office {
+export default class office {
 // initialize class
 
   constructor(data = null) {

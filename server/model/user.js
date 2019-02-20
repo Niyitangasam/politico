@@ -2,7 +2,7 @@ import dbCon from '../config/connection';
 import { encryptPass } from '../Helper/password';
 
 
-export default class User {
+export default class user {
 // A constructor for user class
 
   constructor(data = null) {

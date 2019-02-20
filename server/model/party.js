@@ -1,7 +1,7 @@
 import dbCon from '../config/connection';
 
 
-export default class Party {
+export default class party {
 // initialize class
 
   constructor(data = null) {

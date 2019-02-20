@@ -1,6 +1,6 @@
 import dbCon from '../config/connection';
 
-export default class Vote {
+export default class vote {
 // initialize class
 
   constructor(data = null) {
