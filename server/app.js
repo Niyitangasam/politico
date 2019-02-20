@@ -6,6 +6,7 @@ import partyRoutes from './routes/partyRoutes';
 import officeRoutes from './routes/officeRoutes';
 import userRoutes from './routes/userRoutes';
 import voteRoutes from './routes/voteRoutes';
+import petitionRoutes from './routes/petitionRoutes';
 
 
 config.config();
@@ -22,6 +23,8 @@ app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/parties', partyRoutes);
 app.use('/api/v1/offices', officeRoutes);
 app.use('/api/v1/votes', voteRoutes);
+app.use('/api/v1/petitions', petitionRoutes);
+
 app.use('*', (req, res) => res.status(404).send({
   status: 404,
   message: 'URL NOT FOUND!',

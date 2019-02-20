@@ -41,5 +41,17 @@ const logIn = async (req, res) => {
   return res.status(200).send({ status: 200, message: 'successfully logged in', data: [{ token, user }] });
 };
 
-
-export { createUser, logIn };
+const passwordReset = async (req, res) => {
+  const result = Helper.isValidEmail(req.body);
+  if (result.error) {
+    return Helper.invalidDataMessage(res, result);
+  }
+  const resetEmailQuery = new UserDB(req.body);
+  if (await resetEmailQuery.fetchUser() && await resetEmailQuery.rowCount === 0) {
+    return res.status(404).send({ status: 404, error: 'Email Not found' });
+  }
+  return res.status(200).send({
+    status: 200, data: [{ message: 'Check your email for password reset link', email: req.body.email }],
+  });
+};
+export { createUser, logIn, passwordReset };

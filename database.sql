@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS politico;
 CREATE DATABASE politico;
 
 \c politico;
-
+-- DROP TABLE IF EXISTS votes, candidates, petitions, parties, offices, users;
 CREATE TABLE IF NOT EXISTS parties
     (
       id_party SERIAL PRIMARY KEY NOT NULL,
@@ -48,13 +48,15 @@ CREATE TABLE IF NOT EXISTS votes
    candidate INTEGER REFERENCES candidates(id_candidate) ON DELETE CASCADE,
    PRIMARY KEY (office ,createdBy)
     );
-CREATE TABLE IF NOT EXISTS petition
+CREATE TABLE IF NOT EXISTS petitions
    (
     id_petition SERIAL PRIMARY KEY NOT NULL,
     createdOn  Date ,
     createdBy  INTEGER REFERENCES users(id_user) ON DELETE CASCADE,
     office INTEGER REFERENCES offices(id_office) ON DELETE CASCADE,
-    body VARCHAR(100) NOT NULL
+    body VARCHAR(200) NOT NULL,
+    evidence VARCHAR(200)
 
    	);
+
 

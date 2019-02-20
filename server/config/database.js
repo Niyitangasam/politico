@@ -115,7 +115,8 @@ const Petitions = async () => {
     createdOn  Date ,
     createdBy  INTEGER REFERENCES users(id_user) ON DELETE CASCADE,
     office INTEGER REFERENCES offices(id_office) ON DELETE CASCADE,
-    body VARCHAR(100) NOT NULL
+    body VARCHAR(100) NOT NULL,
+    evidence VARCHAR(200)
     );`;
     await client.query(query);
   } catch (error) {
