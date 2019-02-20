@@ -3,7 +3,7 @@ import ModelVote from '../Model/vote';
 
 
 const saveVote = async (req, res) => {
-  const result = Helper.validateVote(req.body);
+  const result = Helper.validateVote(req.body); 
   if (result.error) {
     return Helper.invalidDataMessage(res, result);
   }
