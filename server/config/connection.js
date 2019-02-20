@@ -9,6 +9,7 @@ const pool = new Pool({
   database: process.env.PG_DB,
   password: process.env.PG_PASSWORD,
   port: 5432,
+  ssl: process.env.PG_SSL || false,
 });
 pool.on('connect', () => console.log('DB CONNECTED#'));
 
