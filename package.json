@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
-    "database": "babel-node ./server/config/tables.js --",
+    "database": "babel-node ./server/config/database.js --",
     "heroku": "babel-node ./server/app.js",
     "test": " npm run database && nyc mocha \"./server/tests/*.js\" --require @babel/register --require @babel/polyfill --exit ",
     "coverage": "nyc report --reporter=text-lcov | coveralls"

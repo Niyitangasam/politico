@@ -23,8 +23,8 @@ app.use('/api/v1/parties', partyRoutes);
 app.use('/api/v1/offices', officeRoutes);
 app.use('/api/v1/votes', voteRoutes);
 app.use('*', (req, res) => res.status(404).send({
-  status: 400,
-  message: 'Wrong URL, Please check it!',
+  status: 404,
+  message: 'URL NOT FOUND!',
 }));
 app.listen(port, () => console.log(`listening on port ${port}`));
 

@@ -1,5 +1,5 @@
 import Helper from '../Helper/Helper';
-import ModelOffice from '../db/Office';
+import ModelOffice from '../Model/Office';
 
 
 // Create a political office
@@ -10,17 +10,11 @@ const createOffice = async (req, res) => {
   }
 
   const AddOfficeQuery = new ModelOffice(req.body);
-  if (!await AddOfficeQuery.createNewOffice()) return res.status(400).send({ status: 400, Error: 'Unable to create newOffice' });
-
-  return res.status(201).send({ status: 201, data: AddOfficeQuery.result });
-
-  // const newOffice = {
-  //   id: offices.length + 1,
-  //   type: req.body.type,
-  //   name: req.body.name,
-  // };
-  // offices.push(newOffice);
-  // return res.status(201).send({ status: 200, data: [newOffice] });
+  if (!await AddOfficeQuery.createNewOffice()) {
+    return res.status(500).send({ status: 500, Error: 'Internal Error' });
+  }
+  return res.status(201)
+    .send({ status: 201, message: 'Office successfully created', data: AddOfficeQuery.result });
 };
 
 
@@ -28,20 +22,25 @@ const createOffice = async (req, res) => {
 
 const getAll = async (req, res) => {
   const GetAllOffice = new ModelOffice();
-  if (!await GetAllOffice.getOffices()) return res.status(400).send({ status: 400, Error: 'Unable to retrieve all Offices!' });
+  if (!await GetAllOffice.getOffices()) {
+    return res.status(400).send({ status: 400, Error: 'Unable to retrieve all Offices!' });
+  }
+  if (GetAllOffice.result.length === 0) {
+    return res.send({ status: 404, Error: 'Offices not found' });
+  }
   return res.send({ status: 200, data: GetAllOffice.result });
 };
 
 const getById = async (req, res) => {
   const { id } = req.params;
   const RetrieveOneOfficeQuery = new ModelOffice(id);
-  if (!await RetrieveOneOfficeQuery.getOfficeById()) return res.status(500).send({ status: 500, Error: 'Error in getting data' });
-  if (RetrieveOneOfficeQuery.result.length === 0) return res.status(404).send({ status: 404, Error: 'Records not found' });
+  if (!await RetrieveOneOfficeQuery.getOfficeById()) {
+    return res.status(500).send({ status: 500, Error: 'Error in getting data' });
+  }
+  if (RetrieveOneOfficeQuery.result.length === 0) {
+    return res.status(404).send({ status: 404, Error: 'Office not found' });
+  }
   return res.status(200).send({ status: 200, data: RetrieveOneOfficeQuery.result });
-  /* const office = offices.find(off => off.id === parseInt(req.params.id, 10));
-  if (!office) return res.status(404).
-  send({ status: 404, Error: 'The Office  with given ID was not found' });
-   return res.send({ status: 200, data: office }); */
 };
 
 
@@ -51,6 +50,15 @@ const registerCandidate = async (req, res) => {
     return Helper.invalidDataMessage(res, result);
   }
 
+  const checkIDQuery = new ModelOffice(req.params.id);
+  if (!await checkIDQuery.getOfficeById()) {
+    return res.status(500).send({ status: 500, Error: 'Error in getting data' });
+  }
+  if (checkIDQuery.result.length === 0) {
+    return res.status(404).send({ status: 404, Error: 'Office with that iD was not found' });
+  }
+  const values = req.body;
+  values.office = req.params.id;
   const AddCandidateQuery = new ModelOffice(req.body);
   if (!await AddCandidateQuery.registerCandidate()) {
     return res.status(422)
@@ -63,8 +71,12 @@ const registerCandidate = async (req, res) => {
 
 const getOfficesResult = async (req, res) => {
   const getResultQuery = new ModelOffice(req.params.id);
-  if (!await getResultQuery.getResults()) return res.status(500).send({ status: 500, Error: 'Error in getting data' });
-  if (getResultQuery.result.length === 0) return res.status(404).send({ status: 404, Error: 'Records not found' });
+  if (!await getResultQuery.getResults()) {
+    return res.status(500).send({ status: 500, Error: 'Error in getting data' });
+  }
+  if (getResultQuery.result.length === 0) {
+    return res.status(404).send({ status: 404, Error: 'Offices not found' });
+  }
   return res.status(200).send({ status: 200, data: getResultQuery.result });
 };
 

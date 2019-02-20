@@ -33,7 +33,6 @@ class Helper {
 
   static validateCandidate(candidate) {
     const schema = Joi.object().keys({
-      office: Joi.number().integer().required(),
       party: Joi.number().integer().required(),
       candidate: Joi.number().integer().required(),
     });
