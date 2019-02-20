@@ -1,4 +1,4 @@
-import Model from '../Model/Party';
+import Model from '../Model/party';
 import Helper from '../Helper/Helper';
 
 

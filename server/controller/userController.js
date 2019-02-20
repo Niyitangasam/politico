@@ -1,5 +1,5 @@
 import Helper from '../Helper/Helper';
-import UserDB from '../Model/User';
+import UserDB from '../Model/user';
 import { checkPassword } from '../Helper/password';
 import { generateToken } from '../middlewares/auth';
 
