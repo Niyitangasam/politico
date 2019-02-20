@@ -1,5 +1,5 @@
-import Helper from '../Helper/Helper';
 import Model from '../Model/Party';
+import Helper from '../Helper/Helper';
 
 
 // create a party
