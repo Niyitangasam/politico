@@ -1,5 +1,5 @@
 import Helper from '../Helper/Helper';
-import ModelOffice from '../Model/office';
+import ModelOffice from '../model/office';
 
 
 // Create a political office

@@ -1,5 +1,5 @@
 import Helper from '../Helper/Helper';
-import ModelVote from '../Model/vote';
+import ModelVote from '../model/vote';
 
 
 const saveVote = async (req, res) => {

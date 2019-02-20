@@ -1,5 +1,5 @@
 import Helper from '../Helper/Helper';
-import Model from '../Model/party';
+import Model from '../model/party';
 
 // create a party
 const createParty = async (req, res) => {
