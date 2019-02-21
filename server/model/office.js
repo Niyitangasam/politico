@@ -89,7 +89,7 @@ export default class office {
         @rowCount returns all  number of rows of data obtained from the queries
         and it is built in property in pq query as well
       */
-      const { rows } = await dbCon.query('SELECT  office ,candidate, CAST(COUNT(*)AS Int) AS result FROM votes WH GROUP BY candidate, office ');
+      const { rows } = await dbCon.query('SELECT  office ,candidate, CAST(COUNT(*)AS Int) AS result FROM votes  GROUP BY candidate, office ');
       for (let votes = 0; votes < rows.length; votes += 1) {
         if (rows[votes].office === parseInt(value, 10)) {
           dataToReturn.push(rows[votes]);
@@ -99,6 +99,24 @@ export default class office {
       return true;
     } catch (error) {
       this.error = error;
+      return false;
+    }
+  }
+
+  async getOfficeByName() {
+    const { name } = this.data;
+    try {
+      /*
+        @rows returns all the data from the queries and it is built in property in pq query
+        @rowCount returns all  number of rows of data obtained from the queries
+        and it is built in property in pq query as well
+      */
+      const { rows, rowCount } = await dbCon.query('SELECT * FROM offices WHERE name= $1', [name]);
+      this.result = rows;
+      this.rowCount = rowCount;
+      return true;
+    } catch (error) {
+      this.error = error.stack;
       return false;
     }
   }

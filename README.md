@@ -63,6 +63,24 @@ Starting application, Run:
 
 #### GET `/api/v1/offices/<id>` Getting a political office for a specific id.
 
+#### POST `/api/v1/auth/signup` Greating a new user
+
+#### POST `/api/v1/auth/login` Loging a new User
+
+#### POST `/api/v1/offices/<office-id>/register`  Register a new user 
+
+#### POST `/api/v1/votes/`  Vote a new User
+
+#### GET  `/api/v1/office/<office-id>/result`  fetch the result of specific office.
+
+#### POST  `/api/v1/petitions/`  Create petitions challenging the outcome of a concluded election
+
+#### POST  `/api/v1/auth/reset`  Reset a password
+
+
+
+
+
 
 
 
