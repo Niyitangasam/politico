@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS politico;
 CREATE DATABASE politico;
 
 \c politico;
--- DROP TABLE IF EXISTS votes, candidates, petitions, parties, offices, users;
+DROP TABLE IF EXISTS votes, candidates, petitions, parties, offices, users;
 CREATE TABLE IF NOT EXISTS parties
     (
       id_party SERIAL PRIMARY KEY NOT NULL,

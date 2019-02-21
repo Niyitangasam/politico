@@ -145,3 +145,68 @@ describe(`GET /offices/<office-id>`, () => {
     });
   });	
 });
+
+
+describe('POST auth/signup', () => {
+  it('should return status 201 when new user record is created', (done) => {
+    const user= {
+      firstname: "Ntanga",
+      lastname:"Samuel",
+      othername:"Nikobahoze", 
+      email:"butare@gmail.com", 
+      password:"niyitanga", 
+      phoneNumber:"0788783963", 
+      passportUrl:"https://hhhhnimage.ph", 
+      isAdmin:"true"
+    };
+    chai.request(app).post('/api/v1/auth/signup').send(user).end((err, res) => {
+        expect(res).to.have.status(201);
+        expect(res.body.status).to.be.a('number');
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data[0]).to.have.property('token').to.be.a('string');
+        expect(res.body.data[0]).to.have.property('user').to.be.an('array');
+        done();
+      });
+  });
+
+  it('should return status 409 when user signs up with already existing fields.', (done) => {
+      const user= {
+      firstname: "Ntanga",
+      lastname:"Samuel",
+      othername:"Nikobahoze", 
+      email:"butare@gmail.com", 
+      password:"niyitanga", 
+      phoneNumber:"0788783963", 
+      passportUrl:"https://hhhhnimage.ph", 
+      isAdmin:"true"
+    };
+    chai.request(app).post('/api/v1/auth/signup').send(user).end((err, res) => {
+        expect(res).to.have.status(409);
+        expect(res.body.status).to.be.a('number').and.to.be.equal(409);
+        expect(res.body).to.have.property('error').and.to.be.a('string');
+        done();
+      });
+  });
+});
+
+
+describe('POST /auth/signin', () => {
+  it('should return status 200 with when sign in is successful.', (done) => {
+    const logins = {
+      email: 'butare@gmail.com',
+      password: 'niyitanga',
+    };
+    chai.request(app).post('/api/v1/auth/login').send(logins).end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.status).to.be.a('number');
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data[0]).to.have.property('token').to.be.an('string');
+        expect(res.body.data[0]).to.have.property('user').to.be.an('object');
+        expect(res.body.data[0].user).to.have.property('email').to.be.an('string');
+        expect(res.body.data[0].user.email).to.be.equals(logins.email);
+        done();
+      });
+  });
+});
+
+
