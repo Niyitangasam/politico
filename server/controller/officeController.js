@@ -10,6 +10,9 @@ const createOffice = async (req, res) => {
   }
 
   const AddOfficeQuery = new ModelOffice(req.body);
+  if (await AddOfficeQuery.getOfficeByName() && await AddOfficeQuery.rowCount > 0) {
+    return res.status(409).send({ status: 409, error: 'Office Name Already Exist' });
+  }
   if (!await AddOfficeQuery.createNewOffice()) {
     return res.status(500).send({ status: 500, Error: 'Internal Error' });
   }
@@ -59,7 +62,7 @@ const registerCandidate = async (req, res) => {
   }
   const values = req.body;
   values.office = req.params.id;
-  const AddCandidateQuery = new ModelOffice(req.body);
+  const AddCandidateQuery = new ModelOffice(values);
   if (!await AddCandidateQuery.registerCandidate()) {
     return res.status(422)
       .send({
