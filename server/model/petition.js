@@ -17,6 +17,11 @@ export default class vote {
     const values = [createdOn, createdBy, office, body, evidence];
 
     try {
+      /*
+        @rows returns all the data from the queries and it is built in property in pq query
+        @rowCount returns all  number of rows of data obtained from the queries
+        and it is built in property in pq query as well
+      */
       const { rows } = await dbCon.query('INSERT INTO petitions(createdOn, createdBy, office, body, evidence) VALUES($1, $2, $3, $4, $5) returning id_petition As id,office, createdby, body As text, evidence', values);
       this.result = rows;
       return true;

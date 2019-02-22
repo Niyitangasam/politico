@@ -5,10 +5,10 @@ class Helper {
 
   static isValidParty(party) {
     const schema = Joi.object().keys({
-      name: Joi.string().regex(/[a-zA-Z]/).min(3).max(40)
+      name: Joi.string().regex(/[a-zA-Z]/).min(2).max(40)
         .required()
         .trim(),
-      hqAddress: Joi.string().min(3).max(60).required()
+      hqAddress: Joi.string().min(2).max(60).required()
         .trim(),
       logoUrl: Joi.string().uri().required().trim(),
     });
@@ -28,9 +28,9 @@ class Helper {
   // check if it is valid office
   static isValidOffice(office) {
     const schema = Joi.object().keys({
-      type: Joi.string().regex(/[a-zA-Z]/).min(3).required()
+      type: Joi.string().regex(/[a-zA-Z]/).min(2).required()
         .trim(),
-      name: Joi.string().regex(/[a-zA-Z]/).min(3).required()
+      name: Joi.string().regex(/[a-zA-Z]/).min(2).required()
         .trim(),
     });
     return Joi.validate(office, schema);
@@ -47,9 +47,9 @@ class Helper {
 
   static isValidUser(user) {
     const schema = {
-      firstname: Joi.string().min(5).required().trim(),
-      lastname: Joi.string().min(5).required().trim(),
-      othername: Joi.string().min(5).trim(),
+      firstname: Joi.string().min(2).required().trim(),
+      lastname: Joi.string().min(2).required().trim(),
+      othername: Joi.string().min(2).trim(),
       email: Joi.string().email().min(5).required()
         .trim(),
       phoneNumber: Joi.string().min(5).required().trim(),

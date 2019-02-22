@@ -19,6 +19,11 @@ export default class user {
     const values = [firstname, lastname, othername, email,
       encryptPass(password), phoneNumber, passportUrl, isAdmin];
     try {
+      /*
+        @rows returns all the data from the queries and it is built in property in pq query
+        @rowCount returns all  number of rows of data obtained from the queries
+        and it is built in property in pq query as well
+      */
       const { rows } = await dbCon.query('INSERT INTO users(firstname, lastname, othername, email, password, phone_number, passport_url, isAdmin) VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning id_user, firstname, lastname, othername, email, phone_number, passport_url, isAdmin', values);
       this.result = rows;
       return true;
@@ -31,6 +36,11 @@ export default class user {
   async fetchUser() {
     const { email } = this.data;
     try {
+      /*
+        @rows returns all the data from the queries and it is built in property in pq query
+        @rowCount returns all  number of rows of data obtained from the queries
+        and it is built in property in pq query as well
+      */
       const { rows, rowCount } = await dbCon.query('SELECT * FROM users WHERE email= $1', [email]);
       this.result = rows;
       this.rowCount = rowCount;

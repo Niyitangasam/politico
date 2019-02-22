@@ -30,7 +30,7 @@ const getOnlyOne = async (req, res) => {
     return res.status(500).send({ status: 500, Error: 'Error in getting data' });
   }
   if (RetrieveOneQuery.result.length === 0) {
-    return res.status(404).send({ status: 404, Error: 'Party not found' });
+    return res.status(204).send({ status: 204, Error: 'Party not found' });
   }
   return res.status(200).send({ status: 200, data: RetrieveOneQuery.result });
 };
@@ -44,7 +44,7 @@ const getAllParty = async (req, res) => {
     return res.status(500).send({ status: 500, Error: 'Error in retriving data' });
   }
   if (GetAllQuery.result.length === 0) {
-    return res.send({ status: 404, Error: 'Parties not found' });
+    return res.send({ status: 204, Error: 'Parties not found' });
   }
   return res.send({ status: 200, data: GetAllQuery.result });
 };
@@ -61,7 +61,7 @@ const editPartyName = async (req, res) => {
     return res.status(500).send({ status: 500, Error: 'Error in retriving data' });
   }
   if (EditNameQuery.result.length === 0) {
-    return res.send({ status: 404, Error: 'Party not found' });
+    return res.send({ status: 204, Error: 'Party not found' });
   }
   if (!await EditNameQuery.updateName(name)) {
     return res.send({ status: 500, Error: 'Unable to Edit it' });
@@ -76,7 +76,7 @@ const deleteParty = async (req, res) => {
     return res.status(500).send({ status: 500, Error: 'Error in retriving data' });
   }
   if (DeletePartyQuery.result.length === 0) {
-    return res.send({ status: 404, Error: 'Party not found' });
+    return res.send({ status: 204, Error: 'Party not found' });
   }
   if (!await DeletePartyQuery.deleteParty()) {
     return res.send({ status: 404, Error: 'Unable to delete it, Try Again' });

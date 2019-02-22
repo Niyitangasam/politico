@@ -9,7 +9,7 @@ import userRoutes from './routes/userRoutes';
 import voteRoutes from './routes/voteRoutes';
 import petitionRoutes from './routes/petitionRoutes';
 
-import swaggerDoc from '../documentation.json';
+import swaggerDoc from '../politico_documentation';
 
 
 config.config();
