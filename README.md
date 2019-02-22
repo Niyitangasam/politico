@@ -80,14 +80,14 @@ Starting application, Run:
 
 
 
+# API DOCUMENTATION
 
-
-
+[Visit the link](https://politico-samuel.herokuapp.com/docs).
 
 
 # Heroku
 
-Access link :[Visit the link](https://politico-samuel.herokuapp.com/). You can test the above API endpoints using this  URL `https://politico-samuel.herokuapp.com/`.
+[Visit the link](https://politico-samuel.herokuapp.com/). You can test the above API endpoints using this  URL `https://politico-samuel.herokuapp.com/`.
 
 
 # Author

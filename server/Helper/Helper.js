@@ -45,7 +45,7 @@ class Helper {
     return Joi.validate(candidate, schema);
   }
 
-// check if it is valid User
+  // check if it is valid User
 
   static isValidUser(user) {
     const schema = {
