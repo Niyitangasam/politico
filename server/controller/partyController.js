@@ -30,7 +30,7 @@ const getOnlyOne = async (req, res) => {
     return res.status(500).send({ status: 500, Error: 'Error in getting data' });
   }
   if (RetrieveOneQuery.result.length === 0) {
-    return res.status(204).send({ status: 204, Error: 'Party not found' });
+    return res.status(404).send({ status: 404, Error: 'Party not found' });
   }
   return res.status(200).send({ status: 200, data: RetrieveOneQuery.result });
 };
