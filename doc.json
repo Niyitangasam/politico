@@ -523,10 +523,13 @@
         "phone": {
           "type": "string"
         },
-        "userStatus": {
+        "passport_url": {
+          "type": "string"
+        },
+        "isAdmin": {
           "type": "integer",
           "format": "int32",
-          "description": "User Status"
+          "description": "Is Admin"
         }
       },
       "xml": {
